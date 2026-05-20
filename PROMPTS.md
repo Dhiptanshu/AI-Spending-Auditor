@@ -96,7 +96,7 @@ The generated structure gave a decent starting point for:
 
 * Section hierarchy.
 * Responsive spacing.
-* Reusable UI sections,
+* Reusable UI sections.
 
 #### What Did Not Work Well
 
