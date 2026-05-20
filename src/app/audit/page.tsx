@@ -1,13 +1,17 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { PageHeading } from "@/components/shared/page-heading";
+import { AuditFormShell } from "@/components/audit/audit-form-shell";
 
 export default function AuditPage() {
   return (
     <AppShell>
-      <PageHeading
-        title="Start audit"
-        description="This route is ready for the audit intake workflow when the MVP form is built."
-      />
+      <div className="space-y-6">
+        <PageHeading
+          title="Start audit"
+          description="The audit flow now has a lightweight local state and persistence foundation."
+        />
+        <AuditFormShell />
+      </div>
     </AppShell>
   );
 }
