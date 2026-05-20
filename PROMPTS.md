@@ -1,16 +1,14 @@
 # PROMPTS.md
 
-# Day 1 — Project Foundation & Architecture
+## Day 1
 
-## Prompt 1 — Project Scaffold Planning
+### Prompt 1
 
-### Model Used
+Used Codex to help scaffold the initial project structure.
 
-OpenAI Codex
+#### Prompt
 
-### Prompt
-
-```text
+```text id="frgj0u"
 You are helping me build a production-quality MVP for a startup-style web app called an AI Spend Audit tool.
 
 Tech stack:
@@ -32,65 +30,41 @@ Please generate:
 1. Recommended folder structure
 2. Initial setup commands
 3. Tailwind + shadcn setup steps
-4. Suggested app architecture for:
-   - pages/routes
-   - components
-   - lib
-   - types
-   - hooks
-   - services
+4. Suggested app architecture
 5. Best practices for keeping this MVP clean and extensible
 
 Do NOT generate the full app.
 Only help scaffold the foundation cleanly.
 ```
 
-### Why I Wrote It This Way
+#### Why I Used This Prompt
 
-I intentionally constrained the model away from generating the entire application. The assignment explicitly warns against one-shot generated codebases, so I focused on using AI for structured planning and setup assistance rather than full autonomous development.
+I wanted help setting up the project foundation quickly without generating the whole application automatically. I specifically asked for a simple structure because AI tools tend to overcomplicate early-stage projects.
 
-I also emphasized:
+#### What Was Useful
 
-* simplicity
-* maintainability
-* avoiding overengineering
+The output helped with:
 
-because early-stage MVPs can become messy quickly when AI tools generate excessive abstractions.
+* Folder organization.
+* Tailwind and shadcn setup.
+* TypeScript structure.
+* Reusable component planning.
 
-### What Worked
+It also helped standardize linting and formatting setup early.
 
-The model produced:
+#### What I Changed Manually
 
-* a clean folder structure
-* modern Next.js conventions
-* reusable architecture ideas
-* ESLint/Prettier setup guidance
-
-It also suggested a scalable separation between UI components, utility logic, and future backend services.
-
-### What Didn’t Work / Issues
-
-The first output attempted to introduce unnecessary abstraction layers and service wrappers too early for an MVP.
-
-I manually simplified:
-
-* folder nesting
-* helper utilities
-* architecture complexity
-
-to keep the codebase lean for Week 1 development.
+Some suggestions introduced too many abstractions for an MVP. I removed unnecessary wrappers and simplified parts of the structure before continuing development.
 
 ---
 
-## Prompt 2 — Landing Page Structure Planning
+### Prompt 2
 
-### Model Used
+Used Codex to help structure the landing page.
 
-OpenAI Codex
+#### Prompt
 
-### Prompt
-
-```text
+```text id="j7d6l0"
 Help me build the initial landing page for an AI Spend Audit SaaS MVP.
 
 Requirements:
@@ -100,54 +74,30 @@ Requirements:
 - shadcn/ui
 - Modern startup aesthetic
 - Mobile responsive
-- Clean spacing and typography
-- No animations yet
 
 Page sections:
 1. Hero section
-2. Short explanation of the tool
-3. “How it works” 3-step section
-4. CTA button leading to /audit
+2. Tool explanation
+3. How it works
+4. CTA section
 5. Footer
 
-Important:
-- Prioritize readability and clean hierarchy
-- Avoid excessive gradients or flashy UI
-- Use reusable components
-- Keep accessibility in mind
-
-Please generate:
-- component structure
-- recommended UI layout
-- starter code for page.tsx
-- reusable section components
-
-Do NOT generate fake backend logic.
+Prioritize readability and reusable components.
+Do not generate backend logic.
 ```
 
-### Why I Wrote It This Way
+#### Why I Used This Prompt
 
-I wanted AI assistance primarily for layout acceleration and component organization, not branding or business logic decisions.
+The goal was to speed up layout work and component organization while still making design decisions manually.
 
-I constrained the prompt to:
+#### What Was Useful
 
-* avoid unnecessary animations
-* keep the design readable
-* focus on accessibility
-* prevent fake backend generation
+The generated structure gave a decent starting point for:
 
-This helped maintain control over the actual product direction.
+* Section hierarchy.
+* Responsive spacing.
+* Reusable UI sections,
 
-### What Worked
+#### What Did Not Work Well
 
-The generated structure helped speed up:
-
-* responsive section layout
-* reusable component organization
-* Tailwind spacing hierarchy
-
-### What Didn’t Work / Issues
-
-Some generated UI suggestions leaned too heavily into generic “AI SaaS” styling with excessive gradients and decorative effects.
-
-I removed or simplified many of those ideas to make the interface cleaner and more product-focused.
+Some styling suggestions looked too generic and overly “AI SaaS” themed. I simplified the UI and removed unnecessary visual effects.
