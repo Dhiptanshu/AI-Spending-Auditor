@@ -1,4 +1,3 @@
-````md
 # AI Spend Audit
 
 AI Spend Audit is a lightweight SaaS-style web application that helps startups and engineering teams evaluate whether they are overspending on AI tooling such as Cursor, ChatGPT, Claude, Copilot, Gemini, and API providers. Users can enter their current plans, spend, and team usage patterns to receive optimization recommendations and estimated savings opportunities.
@@ -13,7 +12,6 @@ The project is being built as a production-style MVP with a focus on practical a
 
 ```bash
 npm install
-````
 
 ### Run locally
 
