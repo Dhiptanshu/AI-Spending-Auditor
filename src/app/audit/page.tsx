@@ -7,8 +7,8 @@ export default function AuditPage() {
     <AppShell>
       <div className="space-y-6">
         <PageHeading
-          title="Start audit"
-          description="The audit flow now has a lightweight local state and persistence foundation."
+          title="Start AI spend audit"
+          description="Enter your team context and AI tool spend to prepare a savings and risk review."
         />
         <AuditFormShell />
       </div>
