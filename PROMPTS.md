@@ -101,3 +101,276 @@ The generated structure gave a decent starting point for:
 #### What Did Not Work Well
 
 Some styling suggestions looked too generic and overly “AI SaaS” themed. I simplified the UI and removed unnecessary visual effects.
+
+````md
+# Day 2
+
+### Prompt 1
+
+Used Codex to design the audit form architecture and pricing configuration structure.
+
+#### Prompt
+
+```text
+I am building the audit input system for an AI Spend Audit application.
+
+Stack:
+- Next.js App Router
+- TypeScript
+- Tailwind
+- shadcn/ui
+
+The form needs to support these tools and plans (refer from PRICING_DATA.md):
+
+- Cursor (Hobby / Pro / Business / Enterprise)
+- GitHub Copilot (Individual / Business / Enterprise)
+- Claude (Free / Pro / Max / Team / Enterprise / API direct)
+- ChatGPT (Plus / Team / Enterprise / API direct)
+- Anthropic API direct
+- OpenAI API direct
+- Gemini (Pro / Ultra / API)
+- Windsurf
+- vO
+
+For each tool:
+- selected plan
+- monthly spend
+- seat count
+
+Global fields:
+- team size
+- primary use case:
+  - coding
+  - writing
+  - data
+  - research
+  - mixed
+
+Requirements:
+- Strong TypeScript typing
+- Easy to extend later
+- Form validation support
+- LocalStorage persistence later
+- Mobile responsive
+- Reusable form sections
+- Pricing configuration should be centralized and reusable later for the audit engine
+- Avoid duplicated configuration data
+
+Recommended Architecture:
+
+Do NOT hardcode pricing directly inside components.
+
+Instead create:
+- src/config/pricing.ts
+- optionally later: src/config/tools.ts
+
+Pricing configuration should support:
+- fixed pricing
+- usage-based API pricing
+- enterprise custom pricing
+- source URLs
+- verification dates
+- pricing model metadata
+
+Enterprise/custom pricing requirements:
+- Users should be able to override pricing manually
+- Custom values should persist for the browser session/local storage
+
+Please help generate:
+1. TypeScript interfaces
+2. Suggested form data structure
+3. Tool + plan configuration structure
+4. Recommended constants/config approach
+5. Component breakdown
+6. Validation strategy
+7. Suggestions for organizing future pricing metadata and audit rules
+
+Do not generate the full UI yet.
+Focus on scalable architecture for the form and audit engine.
+````
+
+#### Why I Used This Prompt
+
+I wanted to finalize the data structure before continuing UI development. The audit engine and pricing comparisons depend heavily on consistent configuration design, so I focused on architecture before implementation.
+
+#### What Was Useful
+
+The output helped organize:
+
+* Tool and plan metadata.
+* Shared pricing configuration.
+* TypeScript interfaces.
+* Reusable form structures.
+* Future audit rule separation.
+
+It also helped avoid duplicating pricing logic inside components.
+
+#### What I Changed Manually
+
+Some suggestions introduced additional abstraction layers that felt unnecessary for an MVP. I simplified parts of the configuration structure and reduced nesting where possible.
+
+---
+
+### Prompt 2
+
+Used Codex to structure the main audit form page.
+
+#### Prompt
+
+```text
+Help me build the main /audit page for an AI Spend Audit SaaS application.
+
+Requirements:
+- Next.js App Router
+- TypeScript
+- Tailwind
+- shadcn/ui
+- Responsive layout
+- Clean B2B SaaS styling
+
+The page should include:
+1. Page heading and short description
+2. Dynamic list of AI tools
+3. Add/remove tool functionality
+4. Inputs for:
+   - tool
+   - plan
+   - monthly spend
+   - seats
+5. Team size input
+6. Primary use case dropdown
+7. CTA button to generate audit
+
+Important:
+- Use reusable components
+- Keep state manageable
+- Avoid unnecessary abstraction
+- No backend integration yet
+
+Generate:
+- component structure
+- starter implementation
+- reusable form section example
+```
+
+#### Why I Used This Prompt
+
+The goal was to build the audit input experience incrementally while maintaining reusable UI patterns and manageable form state.
+
+#### What Was Useful
+
+The generated suggestions helped with:
+
+* Dynamic tool row handling.
+* Responsive form layouts.
+* Reusable form sections.
+* Mobile spacing and hierarchy.
+
+#### What Did Not Work Well
+
+Some generated component patterns relied on unnecessary prop drilling and over-segmented the form into too many files. I consolidated parts of the structure to keep development faster and easier to maintain.
+
+---
+
+### Prompt 3
+
+Used Codex to design LocalStorage persistence safely.
+
+#### Prompt
+
+```text
+Help me add LocalStorage persistence for a multi-section React form in Next.js.
+
+Requirements:
+- Persist form state across reloads
+- Avoid hydration mismatch issues
+- TypeScript support
+- Safe parsing and fallback defaults
+
+Current structure:
+- audit form with dynamic tool entries
+- team size
+- use case
+
+Please suggest:
+1. Best persistence approach
+2. Reusable hook structure
+3. Hydration-safe implementation
+4. Error handling strategy
+
+Do not introduce external state libraries unless necessary.
+```
+
+#### Why I Used This Prompt
+
+The assignment specifically required form persistence across reloads, so I wanted a lightweight solution that worked cleanly with Next.js App Router and client-side rendering.
+
+#### What Was Useful
+
+The output helped with:
+
+* Hydration-safe LocalStorage handling.
+* State initialization patterns.
+* Fallback parsing logic.
+* Reducing unnecessary re-renders.
+
+#### What I Changed Manually
+
+I avoided introducing additional state libraries because the form state was still manageable with React hooks and local component state.
+
+---
+
+### Prompt 4
+
+Used Gemini 3.1 Pro (Low) to improve form UX, accessibility, and validation.
+
+#### Prompt
+
+```text
+Help improve the UX and validation for a SaaS audit form.
+
+Requirements:
+- Clean inline validation
+- Mobile friendly inputs
+- Accessible labels
+- Prevent invalid spend values
+- Good empty states
+- Clear CTA hierarchy
+
+The form includes:
+- tool selection
+- pricing inputs
+- seat counts
+- team size
+- use case
+
+Please suggest:
+1. Validation rules
+2. UX improvements
+3. Accessibility considerations
+4. Loading/disabled button states
+5. Common form mistakes to avoid
+
+Focus on maintainable engineering decisions.
+```
+
+#### Why I Used This Prompt
+
+I wanted to improve the usability of the form before continuing backend and audit engine work. Since the product depends heavily on user input quality, validation and accessibility were important early considerations.
+
+#### What Was Useful
+
+The output helped improve:
+
+* Numeric input validation.
+* Mobile responsiveness.
+* Inline validation messaging.
+* CTA clarity.
+* Accessibility considerations.
+
+#### What Did Not Work Well
+
+Some suggestions introduced interactions that felt too complex for an MVP workflow. I simplified several UX ideas to keep the interface focused and fast to complete.
+
+```
+```
