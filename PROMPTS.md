@@ -45,10 +45,10 @@ I wanted help setting up the project foundation quickly without generating the w
 
 The output helped with:
 
-* Folder organization.
-* Tailwind and shadcn setup.
-* TypeScript structure.
-* Reusable component planning.
+- Folder organization.
+- Tailwind and shadcn setup.
+- TypeScript structure.
+- Reusable component planning.
 
 It also helped standardize linting and formatting setup early.
 
@@ -94,9 +94,9 @@ The goal was to speed up layout work and component organization while still maki
 
 The generated structure gave a decent starting point for:
 
-* Section hierarchy.
-* Responsive spacing.
-* Reusable UI sections.
+- Section hierarchy.
+- Responsive spacing.
+- Reusable UI sections.
 
 #### What Did Not Work Well
 

@@ -1,3 +1,6 @@
+import type { PrimaryUseCase } from "@/config/audit-options";
+import type { ToolId } from "@/types/pricing";
+
 export type AuditStatus = "pending" | "processing" | "completed" | "failed";
 
 export type RiskLevel = "low" | "medium" | "high" | "critical";
@@ -15,21 +18,20 @@ export type AiToolCategory =
   | "other";
 
 export type AiTool = {
-  id: string;
-  name: string;
-  category: AiToolCategory;
-  planName?: string;
-  seats: number;
-  activeUsers?: number;
+  instanceId: string;
+  toolId: ToolId;
+  planId: string;
+  seatCount: number;
   monthlySpend: number;
-  billingCycle: BillingCycle;
-  ownerTeam?: string;
+  pricingSource: "official" | "user-override" | "custom-enterprise";
+  userOverrideMonthlySpend?: number;
   notes?: string;
 };
 
 export type TeamInfo = {
   companyName?: string;
   teamSize: number;
+  primaryUseCase: PrimaryUseCase;
   departmentsUsingAi: string[];
 };
 

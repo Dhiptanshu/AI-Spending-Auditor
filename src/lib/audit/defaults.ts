@@ -4,6 +4,7 @@ export const defaultAuditFormData: AuditFormData = {
   team: {
     companyName: "",
     teamSize: 1,
+    primaryUseCase: "mixed",
     departmentsUsingAi: [],
   },
   tools: [],
