@@ -8,6 +8,9 @@ import {
   AUDIT_SUBMISSION_STORAGE_KEY,
   createPersistedAuditData,
   parsePersistedAuditData,
+  readAuditStorage,
+  removeAuditStorage,
+  writeAuditStorage,
 } from "@/lib/audit/storage";
 import type { AuditFormData } from "@/types/audit";
 
@@ -15,6 +18,7 @@ type PersistentAuditDraftState = {
   draft: AuditFormData;
   isLoaded: boolean;
   updatedAt?: string;
+  storageError?: string;
   setDraft: (draft: AuditFormData) => void;
   saveSubmission: (submission: AuditFormData) => void;
   clearDraft: () => void;
@@ -24,10 +28,11 @@ export function usePersistentAuditDraft(): PersistentAuditDraftState {
   const [draft, setDraftState] = useState<AuditFormData>(defaultAuditFormData);
   const [isLoaded, setIsLoaded] = useState(false);
   const [updatedAt, setUpdatedAt] = useState<string>();
+  const [storageError, setStorageError] = useState<string>();
 
   useEffect(() => {
     const persisted = parsePersistedAuditData(
-      window.localStorage.getItem(AUDIT_DRAFT_STORAGE_KEY),
+      readAuditStorage(AUDIT_DRAFT_STORAGE_KEY),
     );
 
     if (persisted) {
@@ -45,12 +50,14 @@ export function usePersistentAuditDraft(): PersistentAuditDraftState {
 
     const timeoutId = window.setTimeout(() => {
       const persisted = createPersistedAuditData(draft);
+      const didWrite = writeAuditStorage(AUDIT_DRAFT_STORAGE_KEY, persisted);
 
-      window.localStorage.setItem(
-        AUDIT_DRAFT_STORAGE_KEY,
-        JSON.stringify(persisted),
-      );
-      setUpdatedAt(persisted.updatedAt);
+      if (didWrite) {
+        setUpdatedAt(persisted.updatedAt);
+        setStorageError(undefined);
+      } else {
+        setStorageError("Unable to save audit draft in this browser.");
+      }
     }, 400);
 
     return () => window.clearTimeout(timeoutId);
@@ -62,26 +69,31 @@ export function usePersistentAuditDraft(): PersistentAuditDraftState {
 
   const saveSubmission = useCallback((submission: AuditFormData) => {
     const persisted = createPersistedAuditData(submission);
+    const didWrite = writeAuditStorage(AUDIT_SUBMISSION_STORAGE_KEY, persisted);
 
-    window.localStorage.setItem(
-      AUDIT_SUBMISSION_STORAGE_KEY,
-      JSON.stringify(persisted),
-    );
-    window.localStorage.removeItem(AUDIT_DRAFT_STORAGE_KEY);
+    removeAuditStorage(AUDIT_DRAFT_STORAGE_KEY);
     setDraftState(submission);
     setUpdatedAt(persisted.updatedAt);
+
+    if (didWrite) {
+      setStorageError(undefined);
+    } else {
+      setStorageError("Unable to save audit submission in this browser.");
+    }
   }, []);
 
   const clearDraft = useCallback(() => {
-    window.localStorage.removeItem(AUDIT_DRAFT_STORAGE_KEY);
+    removeAuditStorage(AUDIT_DRAFT_STORAGE_KEY);
     setDraftState(defaultAuditFormData);
     setUpdatedAt(undefined);
+    setStorageError(undefined);
   }, []);
 
   return {
     draft,
     isLoaded,
     updatedAt,
+    storageError,
     setDraft,
     saveSubmission,
     clearDraft,

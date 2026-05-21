@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   AUDIT_SUBMISSION_STORAGE_KEY,
   parsePersistedAuditData,
+  readAuditStorage,
 } from "@/lib/audit/storage";
 import type { PersistedAuditData } from "@/types/audit";
 
@@ -14,9 +15,7 @@ export function useAuditSubmission() {
 
   useEffect(() => {
     setSubmission(
-      parsePersistedAuditData(
-        window.localStorage.getItem(AUDIT_SUBMISSION_STORAGE_KEY),
-      ),
+      parsePersistedAuditData(readAuditStorage(AUDIT_SUBMISSION_STORAGE_KEY)),
     );
     setIsLoaded(true);
   }, []);

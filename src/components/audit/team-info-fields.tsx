@@ -1,12 +1,14 @@
+import { useFormContext } from "react-hook-form";
 import { PRIMARY_USE_CASES, type PrimaryUseCase } from "@/config/audit-options";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import type { TeamInfo } from "@/types/audit";
-
-type TeamInfoFieldsProps = {
-  value: TeamInfo;
-  onChange: (value: TeamInfo) => void;
-};
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import type { AuditFormValues } from "@/lib/validations/audit";
 
 const useCaseLabels: Record<PrimaryUseCase, string> = {
   coding: "Coding",
@@ -16,46 +18,53 @@ const useCaseLabels: Record<PrimaryUseCase, string> = {
   mixed: "Mixed",
 };
 
-export function TeamInfoFields({ value, onChange }: TeamInfoFieldsProps) {
+export function TeamInfoFields() {
+  const { control } = useFormContext<AuditFormValues>();
+
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="grid gap-2">
-        <Label htmlFor="team-size">Team size</Label>
-        <Input
-          id="team-size"
-          min={1}
-          inputMode="numeric"
-          type="number"
-          value={value.teamSize}
-          onChange={(event) =>
-            onChange({
-              ...value,
-              teamSize: Math.max(1, Number(event.target.value) || 1),
-            })
-          }
-        />
-      </div>
+      <FormField
+        control={control}
+        name="team.teamSize"
+        render={({ field }) => (
+          <FormItem className="space-y-1">
+            <FormLabel>Team size</FormLabel>
+            <FormControl>
+              <Input
+                {...field}
+                min={1}
+                inputMode="numeric"
+                type="number"
+                onChange={(e) => field.onChange(e.target.valueAsNumber || 1)}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      <div className="grid gap-2">
-        <Label htmlFor="primary-use-case">Primary use case</Label>
-        <select
-          id="primary-use-case"
-          value={value.primaryUseCase}
-          onChange={(event) =>
-            onChange({
-              ...value,
-              primaryUseCase: event.target.value as PrimaryUseCase,
-            })
-          }
-          className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
-        >
-          {PRIMARY_USE_CASES.map((useCase) => (
-            <option key={useCase} value={useCase}>
-              {useCaseLabels[useCase]}
-            </option>
-          ))}
-        </select>
-      </div>
+      <FormField
+        control={control}
+        name="team.primaryUseCase"
+        render={({ field }) => (
+          <FormItem className="space-y-1">
+            <FormLabel>Primary use case</FormLabel>
+            <FormControl>
+              <select
+                {...field}
+                className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
+              >
+                {PRIMARY_USE_CASES.map((useCase) => (
+                  <option key={useCase} value={useCase}>
+                    {useCaseLabels[useCase]}
+                  </option>
+                ))}
+              </select>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </div>
   );
 }

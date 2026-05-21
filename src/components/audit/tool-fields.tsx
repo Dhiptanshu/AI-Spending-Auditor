@@ -1,53 +1,75 @@
 import { Trash2 } from "lucide-react";
+import { useFormContext, useWatch } from "react-hook-form";
 
 import { TOOL_PRICING_CONFIG } from "@/config/pricing";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { getDefaultPlanId, getToolConfig } from "@/lib/pricing/get-plan";
 import { estimateOfficialMonthlySpend } from "@/lib/pricing/estimate-official-spend";
 import { planRequiresCustomPricing } from "@/lib/pricing/pricing-guards";
 import type { AiTool } from "@/types/audit";
 import type { ToolId } from "@/types/pricing";
+import type { AuditFormValues } from "@/lib/validations/audit";
 
 type ToolFieldsProps = {
   index: number;
-  value: AiTool;
-  onChange: (value: AiTool) => void;
   onRemove: () => void;
   canRemove: boolean;
 };
 
 export function ToolFields({
   index,
-  value,
-  onChange,
   onRemove,
   canRemove,
 }: ToolFieldsProps) {
-  const selectedTool = getToolConfig(value.toolId);
+  const { control, setValue, getValues } = useFormContext<AuditFormValues>();
+
+  const currentTool = useWatch({
+    control,
+    name: `tools.${index}`,
+  }) as AiTool;
+
+  if (!currentTool) return null;
+
+  const selectedTool = getToolConfig(currentTool.toolId);
   const selectedPlan = selectedTool?.plans.find(
-    (plan) => plan.id === value.planId,
+    (plan) => plan.id === currentTool.planId,
   );
   const requiresCustomPricing = selectedPlan
     ? planRequiresCustomPricing(selectedPlan)
     : false;
+  const supportsAnnualBilling =
+    requiresCustomPricing ||
+    selectedPlan?.pricing.some(
+      (price) => price.kind === "fixed" && price.billingCadence === "annual",
+    ) === true;
 
   function updatePricingEstimate(nextValue: AiTool) {
     const estimate = estimateOfficialMonthlySpend(
       nextValue.toolId,
       nextValue.planId,
       nextValue.seatCount,
+      nextValue.billingCycle,
     );
 
-    return {
-      ...nextValue,
-      monthlySpend: estimate ?? nextValue.monthlySpend,
-      pricingSource: estimate ? "official" : "custom-enterprise",
-      userOverrideMonthlySpend: estimate
-        ? undefined
-        : nextValue.userOverrideMonthlySpend,
-    } satisfies AiTool;
+    const monthlySpend = estimate ?? nextValue.monthlySpend;
+    const pricingSource = estimate ? "official" : "custom-enterprise";
+    const userOverrideMonthlySpend = estimate
+      ? undefined
+      : nextValue.userOverrideMonthlySpend;
+
+    setValue(`tools.${index}.monthlySpend`, monthlySpend, { shouldValidate: true });
+    setValue(`tools.${index}.pricingSource`, pricingSource);
+    if (userOverrideMonthlySpend !== undefined) {
+      setValue(`tools.${index}.userOverrideMonthlySpend`, userOverrideMonthlySpend);
+    }
   }
 
   return (
@@ -72,98 +94,172 @@ export function ToolFields({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="grid gap-2">
-          <Label htmlFor={`${value.instanceId}-tool`}>Tool</Label>
-          <select
-            id={`${value.instanceId}-tool`}
-            value={value.toolId}
-            onChange={(event) => {
-              const toolId = event.target.value as ToolId;
-              const planId = getDefaultPlanId(toolId) ?? "";
-              onChange(
-                updatePricingEstimate({
-                  ...value,
-                  toolId,
-                  planId,
-                }),
-              );
-            }}
-            className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
-          >
-            {TOOL_PRICING_CONFIG.map((tool) => (
-              <option key={tool.id} value={tool.id}>
-                {tool.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FormField
+          control={control}
+          name={`tools.${index}.toolId`}
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Tool</FormLabel>
+              <FormControl>
+                <select
+                  {...field}
+                  onChange={(event) => {
+                    const toolId = event.target.value as ToolId;
+                    const planId = getDefaultPlanId(toolId) ?? "";
+                    field.onChange(toolId);
+                    setValue(`tools.${index}.planId`, planId);
+                    setValue(`tools.${index}.billingCycle`, "monthly");
 
-        <div className="grid gap-2">
-          <Label htmlFor={`${value.instanceId}-plan`}>Plan</Label>
-          <select
-            id={`${value.instanceId}-plan`}
-            value={value.planId}
-            onChange={(event) =>
-              onChange(
-                updatePricingEstimate({
-                  ...value,
-                  planId: event.target.value,
-                }),
-              )
-            }
-            className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
-          >
-            {selectedTool?.plans.map((plan) => (
-              <option key={plan.id} value={plan.id}>
-                {plan.label}
-              </option>
-            ))}
-          </select>
-        </div>
+                    const nextValue = {
+                      ...getValues(`tools.${index}`),
+                      toolId,
+                      planId,
+                      billingCycle: "monthly",
+                    } as AiTool;
+                    updatePricingEstimate(nextValue);
+                  }}
+                  className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
+                >
+                  {TOOL_PRICING_CONFIG.map((tool) => (
+                    <option key={tool.id} value={tool.id}>
+                      {tool.name}
+                    </option>
+                  ))}
+                </select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <div className="grid gap-2">
-          <Label htmlFor={`${value.instanceId}-seats`}>Seats</Label>
-          <Input
-            id={`${value.instanceId}-seats`}
-            min={1}
-            inputMode="numeric"
-            type="number"
-            value={value.seatCount}
-            onChange={(event) => {
-              const seatCount = Math.max(1, Number(event.target.value) || 1);
-              onChange(updatePricingEstimate({ ...value, seatCount }));
-            }}
-          />
-        </div>
+        <FormField
+          control={control}
+          name={`tools.${index}.planId`}
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Plan</FormLabel>
+              <FormControl>
+                <select
+                  {...field}
+                  onChange={(event) => {
+                    const planId = event.target.value;
+                    field.onChange(planId);
+                    setValue(`tools.${index}.billingCycle`, "monthly");
+                    const nextValue = {
+                      ...getValues(`tools.${index}`),
+                      planId,
+                      billingCycle: "monthly",
+                    } as AiTool;
+                    updatePricingEstimate(nextValue);
+                  }}
+                  className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
+                >
+                  {selectedTool?.plans.map((plan) => (
+                    <option key={plan.id} value={plan.id}>
+                      {plan.label}
+                    </option>
+                  ))}
+                </select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <div className="grid gap-2">
-          <Label htmlFor={`${value.instanceId}-monthly-spend`}>
-            Monthly spend
-          </Label>
-          <Input
-            id={`${value.instanceId}-monthly-spend`}
-            min={0}
-            inputMode="decimal"
-            type="number"
-            value={value.monthlySpend}
-            onChange={(event) => {
-              const monthlySpend = Math.max(0, Number(event.target.value) || 0);
-              onChange({
-                ...value,
-                monthlySpend,
-                pricingSource: requiresCustomPricing
-                  ? "custom-enterprise"
-                  : "user-override",
-                userOverrideMonthlySpend: monthlySpend,
-              });
-            }}
-          />
-          <p className="text-muted-foreground text-xs">
-            {requiresCustomPricing
-              ? "Enter the negotiated or custom monthly amount."
-              : "Official pricing is prefilled when available; edit to override."}
-          </p>
-        </div>
+        <FormField
+          control={control}
+          name={`tools.${index}.billingCycle`}
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Billing</FormLabel>
+              <FormControl>
+                <select
+                  {...field}
+                  onChange={(event) => {
+                    const billingCycle = event.target.value as AiTool["billingCycle"];
+                    field.onChange(billingCycle);
+                    const nextValue = {
+                      ...getValues(`tools.${index}`),
+                      billingCycle,
+                    } as AiTool;
+                    updatePricingEstimate(nextValue);
+                  }}
+                  className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-8 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-3"
+                >
+                  <option value="monthly">Monthly billing</option>
+                  <option value="annual" disabled={!supportsAnnualBilling}>
+                    Yearly billing
+                  </option>
+                </select>
+              </FormControl>
+              <p className="text-muted-foreground text-xs">
+                Prices are stored as monthly equivalents for audit calculations.
+              </p>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name={`tools.${index}.seatCount`}
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Seats</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  min={1}
+                  inputMode="numeric"
+                  type="number"
+                  onChange={(event) => {
+                    const seatCount = Math.max(1, Number(event.target.value) || 1);
+                    field.onChange(seatCount);
+                    const nextValue = {
+                      ...getValues(`tools.${index}`),
+                      seatCount,
+                    } as AiTool;
+                    updatePricingEstimate(nextValue);
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name={`tools.${index}.monthlySpend`}
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <FormLabel>Monthly spend</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  min={0}
+                  inputMode="decimal"
+                  type="number"
+                  onChange={(event) => {
+                    const monthlySpend = Math.max(0, Number(event.target.value) || 0);
+                    field.onChange(monthlySpend);
+                    setValue(
+                      `tools.${index}.pricingSource`,
+                      requiresCustomPricing ? "custom-enterprise" : "user-override"
+                    );
+                    setValue(`tools.${index}.userOverrideMonthlySpend`, monthlySpend);
+                  }}
+                />
+              </FormControl>
+              <p className="text-muted-foreground text-xs">
+                {requiresCustomPricing
+                  ? "Enter the negotiated or custom monthly amount."
+                  : "Official pricing is prefilled when available; edit to override."}
+              </p>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </div>
     </div>
   );

@@ -1,20 +1,17 @@
-import { Plus } from "lucide-react";
+import { Plus, PackageOpen } from "lucide-react";
 
 import { ToolFields } from "@/components/audit/tool-fields";
 import { Button } from "@/components/ui/button";
-import type { AiTool } from "@/types/audit";
 
 type ToolListProps = {
-  tools: AiTool[];
+  tools: { instanceId: string; key: string }[];
   onAddTool: () => void;
-  onUpdateTool: (instanceId: string, tool: AiTool) => void;
   onRemoveTool: (instanceId: string) => void;
 };
 
 export function ToolList({
   tools,
   onAddTool,
-  onUpdateTool,
   onRemoveTool,
 }: ToolListProps) {
   return (
@@ -33,18 +30,30 @@ export function ToolList({
       </div>
 
       <div className="space-y-4">
-        {tools.map((tool, index) => (
-          <ToolFields
-            key={tool.instanceId}
-            index={index}
-            value={tool}
-            canRemove={tools.length > 1}
-            onChange={(updatedTool) =>
-              onUpdateTool(tool.instanceId, updatedTool)
-            }
-            onRemove={() => onRemoveTool(tool.instanceId)}
-          />
-        ))}
+        {tools.length === 0 ? (
+          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center animate-in fade-in-50">
+            <div className="bg-muted mb-4 rounded-full p-3">
+              <PackageOpen className="text-muted-foreground size-6" aria-hidden="true" />
+            </div>
+            <h3 className="mb-1 text-lg font-semibold">No tools added</h3>
+            <p className="text-muted-foreground mb-4 text-sm max-w-sm">
+              You haven't added any AI tools yet. Add your first tool to begin calculating your estimated spend and potential savings.
+            </p>
+            <Button type="button" onClick={onAddTool}>
+              <Plus className="mr-2 size-4" aria-hidden="true" />
+              Add your first tool
+            </Button>
+          </div>
+        ) : (
+          tools.map((tool, index) => (
+            <ToolFields
+              key={tool.key}
+              index={index}
+              canRemove={true}
+              onRemove={() => onRemoveTool(tool.instanceId)}
+            />
+          ))
+        )}
       </div>
     </div>
   );

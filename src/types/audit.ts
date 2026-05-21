@@ -21,6 +21,7 @@ export type AiTool = {
   instanceId: string;
   toolId: ToolId;
   planId: string;
+  billingCycle: BillingCycle;
   seatCount: number;
   monthlySpend: number;
   pricingSource: "official" | "user-override" | "custom-enterprise";

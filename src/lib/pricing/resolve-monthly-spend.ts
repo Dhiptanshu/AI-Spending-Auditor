@@ -1,4 +1,5 @@
 import { getPlanConfig } from "@/lib/pricing/get-plan";
+import { getFixedMonthlyEquivalentPrice } from "@/lib/pricing/estimate-official-spend";
 import type { AiTool } from "@/types/audit";
 
 export type ResolvedMonthlySpend = {
@@ -20,20 +21,19 @@ export function resolveMonthlySpend(tool: AiTool): ResolvedMonthlySpend {
   }
 
   const plan = getPlanConfig(tool.toolId, tool.planId);
-  const fixedPrice = plan?.pricing.find((price) => price.kind === "fixed");
+  const amount = getFixedMonthlyEquivalentPrice(
+    tool.toolId,
+    tool.planId,
+    tool.billingCycle,
+  );
 
-  if (!plan || !fixedPrice || plan.requiresCustomPricing) {
+  if (!plan || typeof amount !== "number" || plan.requiresCustomPricing) {
     return {
       amount: tool.monthlySpend,
       source: tool.pricingSource,
       needsUserPricing: true,
     };
   }
-
-  const amount =
-    fixedPrice.currency === "USD"
-      ? fixedPrice.amountMonthly
-      : (fixedPrice.estimatedUsdMonthly ?? fixedPrice.amountMonthly);
 
   return {
     amount: amount * tool.seatCount,

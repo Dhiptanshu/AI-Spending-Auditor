@@ -18,7 +18,7 @@
 ## Claude
 
 - Free: $0/user/month — https://claude.com/pricing — verified 2026-05-21
-- Pro: $17/user/month — https://claude.com/pricing — verified 2026-05-21
+- Pro: $20/user/month monthly billing / $17/user/month billed yearly — https://claude.com/pricing — verified 2026-05-21 
 - Max: From $100/user/month — https://claude.com/pricing — verified 2026-05-21
 - Team Standard Seat: $20/seat/month billed annually / $25/seat/month billed monthly — https://claude.com/pricing#team-&-enterprise — verified 2026-05-21
 - Team Premium Seat: $100/seat/month billed annually / $125/seat/month billed monthly — https://claude.com/pricing#team-&-enterprise — verified 2026-05-21
