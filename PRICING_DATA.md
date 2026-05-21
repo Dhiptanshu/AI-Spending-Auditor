@@ -55,7 +55,7 @@
 - Plus: ₹1999/user/month (~$20.78/user/month) — https://chatgpt.com/pricing — verified 2026-05-21
 - Pro: ₹10699/user/month (~$111.20/user/month) — https://chatgpt.com/pricing — verified 2026-05-21
 - Go: ₹399/user/month (~$4.15/user/month) — https://chatgpt.com/pricing — verified 2026-05-21
-- Business: ₹2,250/user/month (~$23.39/user/month) billed monthly / ₹1,800/user/month (~$18.71/user/month) billed annually — https://chatgpt.com/business/business-plan — verified 2026-05-21
+- Business: ₹2250/user/month (~$23.39/user/month) billed monthly / ₹1800/user/month (~$18.71/user/month) billed annually — https://chatgpt.com/business/business-plan — verified 2026-05-21
 - Enterprise: Custom pricing — https://chatgpt.com/business/enterprise — verified 2026-05-21
 
 ## OpenAI API Direct
