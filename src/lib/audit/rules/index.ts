@@ -1,9 +1,12 @@
 import { checkAnnualBilling } from "./check-annual-billing";
 import { checkPriceDiscrepancy } from "./check-price-discrepancy";
+import { checkConsolidation } from "./check-consolidation";
+import { checkEnterpriseTier } from "./check-enterprise-tier";
 import type { AuditRule } from "@/types/engine";
 
-// The order of rules doesn't strictly matter as they are independent pure functions
 export const auditRules: AuditRule[] = [
   checkAnnualBilling,
   checkPriceDiscrepancy,
+  checkConsolidation,
+  checkEnterpriseTier,
 ];
