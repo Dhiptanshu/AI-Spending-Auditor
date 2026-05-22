@@ -42,3 +42,36 @@ export type NormalizedAuditPayload = {
     totalDiscrepancyAmount: number;
   };
 };
+
+export type RecommendationCategory = 
+  | "annual-billing"
+  | "downgrade-plan"
+  | "tool-consolidation"
+  | "seat-optimization"
+  | "api-transition"
+  | "price-discrepancy";
+
+export type AuditRecommendation = {
+  id: string; 
+  relatedInstanceIds: string[]; 
+  category: RecommendationCategory;
+  
+  title: string; 
+  description: string; 
+  rationale: string; 
+  
+  monthlySavings: number; 
+  annualSavings: number;  
+  
+  confidence: "high" | "medium" | "low"; 
+};
+
+export type AuditEngineResult = {
+  currentMonthlySpend: number;
+  optimizedMonthlySpend: number;
+  totalMonthlySavings: number;
+  totalAnnualSavings: number;
+  recommendations: AuditRecommendation[];
+};
+
+export type AuditRule = (payload: NormalizedAuditPayload) => AuditRecommendation[];
