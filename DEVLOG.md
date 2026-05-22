@@ -17,3 +17,15 @@
 **Blockers / what I'm stuck on:** Some form state updates became difficult to manage cleanly once dynamic tool rows and custom pricing overrides were added. I also had to simplify a few component abstractions because the generated structure became harder to reason about during iteration.
 
 **Plan for tomorrow:** Start building the audit recommendation engine using centralized pricing/config data. Implement initial savings calculations, recommendation rules, and pure utility functions that can later be unit tested independently from the UI.
+
+## Day 3 — 2026-05-22
+
+**Hours worked:** 5
+
+**What I did:** Architected and implemented the core Audit Recommendation Engine as a pure functional pipeline decoupled from the UI. I built a data normalization layer to hydrate raw form inputs into deterministic math. Then, I authored four independent rule heuristics: Annual Billing arbitrage, Price Discrepancy detection (ghost seats), Tool Consolidation (identifying overlapping tools), and Enterprise Tier overprovisioning. Finally, I successfully integrated a testing framework and wrote a comprehensive suite of automated tests covering the engine's edge cases. I also added a professional testing documentation file and set up a continuous integration pipeline that runs linting, typechecking, and tests.
+
+**What I learned:** Building the logic layer as a headless array of pure functions made it incredibly easy to test and extend. By avoiding mocks and simply passing structured data objects into the tests, the unit tests run extremely fast and provide immense confidence. Creating specific string formatter utilities also keeps the "finance-readable" logic perfectly separated from the math calculations.
+
+**Blockers / what I'm stuck on:** GitHub Actions and local Windows environments occasionally drift (e.g., `&&` in PowerShell vs Bash), and `npm install` for test dependencies took longer than expected. Had a minor slip up with some stale `any` casts in the React hook form dependency arrays, but cleaned them up with ESLint.
+
+**Plan for tomorrow:** Dive into the results dashboard UI. Map over the output of the recommendation engine and render the metrics, savings calculations, and recommendation cards in a beautiful, professional layout.
