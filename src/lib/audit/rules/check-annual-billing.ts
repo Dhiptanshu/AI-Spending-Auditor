@@ -16,7 +16,7 @@ export const checkAnnualBilling: AuditRule = (payload) => {
 
     // Check if an annual plan exists for this tool & plan
     const annualMonthlyEquivalent = getFixedMonthlyEquivalentPrice(
-      tool.toolId as import("@/types/audit").ToolId,
+      tool.toolId as import("@/types/pricing").ToolId,
       tool.planId,
       "annual"
     );
