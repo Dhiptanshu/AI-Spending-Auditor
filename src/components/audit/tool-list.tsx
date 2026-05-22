@@ -37,7 +37,7 @@ export function ToolList({
             </div>
             <h3 className="mb-1 text-lg font-semibold">No tools added</h3>
             <p className="text-muted-foreground mb-4 text-sm max-w-sm">
-              You haven't added any AI tools yet. Add your first tool to begin calculating your estimated spend and potential savings.
+              You haven&apos;t added any AI tools yet. Add your first tool to begin calculating your estimated spend and potential savings.
             </p>
             <Button type="button" onClick={onAddTool}>
               <Plus className="mr-2 size-4" aria-hidden="true" />

@@ -1,7 +1,6 @@
 "use client";
 
-import type { FormEvent } from "react";
-import { useMemo, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,6 +65,7 @@ export function AuditFormShell() {
         });
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoaded, form, draft.tools.length]); // Intentionally omitting full draft to avoid resetting on every change
 
   // Sync form to persistent draft
@@ -77,7 +77,7 @@ export function AuditFormShell() {
     return () => subscription.unsubscribe();
   }, [form, setDraft]);
 
-  const { fields, append, update, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "tools",
     keyName: "key", // use 'key' since 'id' might conflict or not be needed here
@@ -124,7 +124,7 @@ export function AuditFormShell() {
           </CardHeader>
           <CardContent>
             <ToolList
-              tools={fields as any}
+              tools={fields as unknown as { instanceId: string; key: string }[]}
               onAddTool={addTool}
               onRemoveTool={removeTool}
             />
