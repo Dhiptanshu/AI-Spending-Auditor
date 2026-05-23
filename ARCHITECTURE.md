@@ -6,24 +6,25 @@ This document outlines the architectural decisions, data flow, and scaling strat
 
 ```mermaid
 flowchart TD
-    subgraph Frontend [UI Layer (Next.js / React)]
+
+    subgraph Frontend["UI Layer - Next.js / React"]
         A[Landing Page] --> B[Audit Form Shell]
-        B --> |React Hook Form| C[Data Validation & Capture]
-        C --> |Zod Schema| D[Local Storage Draft]
+        B -->|React Hook Form| C[Data Validation and Capture]
+        C -->|Zod Schema| D[Local Storage Draft]
         D --> E[Submit Action]
     end
 
-    subgraph Core Engine [Business Logic Layer (Pure TypeScript)]
+    subgraph CoreEngine["Business Logic Layer - Pure TypeScript"]
         E -->|Raw AuditFormData| F[normalizeAuditPayload]
-        
+
         subgraph Normalization
             F -->|Pricing Metadata| G[Fetch Official Baselines]
             F -->|Billing Resolution| H[Calculate Expected Spends]
         end
-        
+
         H -->|NormalizedAuditPayload| I[generateAuditReport]
-        
-        subgraph Rules Engine
+
+        subgraph RulesEngine["Rules Engine"]
             I --> J[checkAnnualBilling]
             I --> K[checkPriceDiscrepancy]
             I --> L[checkConsolidation]
@@ -31,8 +32,12 @@ flowchart TD
         end
     end
 
-    subgraph Result [Presentation Layer]
-        J & K & L & M --> N[Aggregate Findings & Calculate Savings]
+    subgraph Result["Presentation Layer"]
+        J --> N[Aggregate Findings and Calculate Savings]
+        K --> N
+        L --> N
+        M --> N
+
         N -->|AuditEngineResult| O[Results Dashboard]
     end
 ```
