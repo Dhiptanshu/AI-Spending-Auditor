@@ -3,6 +3,8 @@
 import { useAuditReport } from "@/hooks/use-audit-report";
 import { MetricsSummary } from "./metrics-summary";
 import { RecommendationList } from "./recommendation-list";
+import { AISummaryCard } from "./ai-summary-card";
+import { ConversionCTA } from "./conversion-cta";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -46,6 +48,8 @@ export function ResultsDashboard() {
         </Link>
       </div>
 
+      <AISummaryCard report={report} />
+
       <MetricsSummary
         currentMonthlySpend={report.currentMonthlySpend}
         optimizedMonthlySpend={report.optimizedMonthlySpend}
@@ -53,6 +57,8 @@ export function ResultsDashboard() {
       />
 
       <RecommendationList recommendations={report.recommendations} />
+
+      <ConversionCTA report={report} />
     </div>
   );
 }
