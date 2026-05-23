@@ -1,17 +1,14 @@
-import { AppShell } from "@/components/layout/app-shell";
-import { ResultsShell } from "@/components/results/results-shell";
-import { PageHeading } from "@/components/shared/page-heading";
+import { ResultsDashboard } from "@/components/results/results-dashboard";
+
+export const metadata = {
+  title: "Audit Results | AI Spend Auditor",
+  description: "Review your optimized AI spend and savings recommendations.",
+};
 
 export default function ResultsPage() {
   return (
-    <AppShell>
-      <div className="space-y-6">
-        <PageHeading
-          title="Audit results"
-          description="Results will read from the submitted audit snapshot and render calculated savings."
-        />
-        <ResultsShell />
-      </div>
-    </AppShell>
+    <div className="container py-10 md:py-12">
+      <ResultsDashboard />
+    </div>
   );
 }
