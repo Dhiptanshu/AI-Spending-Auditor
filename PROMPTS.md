@@ -599,3 +599,355 @@ The output helped with:
 #### What I Changed Manually
 
 Some generated recommendation rules assumed too much about user workflows without enough supporting data. I narrowed the logic to more defensible recommendations tied directly to pricing and seat utilization.
+
+---
+
+## Day 4
+
+### Prompt 1
+
+Used Gemini 3.1 Pro (Low) to design the results page architecture and audit data flow.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am building the results experience for an AI Spend Audit SaaS application.
+
+Current stack:
+- Next.js 15 App Router
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Vitest
+
+Current progress:
+- Dynamic audit form completed
+- LocalStorage persistence completed
+- Pricing metadata layer completed
+- Normalization layer completed
+- Pure recommendation engine completed
+- Savings calculations completed
+- Unit tests and CI configured
+
+Current audit engine output already includes:
+- per-tool recommendations
+- monthly savings
+- annual savings
+- recommendation reasons
+- optimization flags
+
+Goal of this segment:
+Build the architecture and data flow for the results page.
+
+Requirements:
+- Results page should only render precomputed audit results
+- No business logic inside React UI components
+- Clean separation between:
+  - audit engine
+  - result formatting
+  - UI rendering
+- Mobile responsive
+- Screenshot-friendly layout
+- Easy to extend later with public shareable URLs
+
+Please help generate:
+1. Recommended results page architecture
+2. Suggested TypeScript result types
+3. Suggested folder/component structure for:
+   - app/results
+   - components/results
+4. Best practices for:
+   - passing audit result data
+   - serializing result payloads
+   - formatting currency and savings
+5. Suggestions for keeping UI components presentation-focused
+6. Suggestions for loading/error states
+
+Avoid:
+- unnecessary charts
+- business logic inside components
+- overengineered state management
+
+Focus on maintainable SaaS-style results architecture.
+```
+
+#### Why I Used This Prompt
+
+The recommendation engine was already generating deterministic audit results, so I wanted to focus on building a clean presentation layer instead of mixing additional logic into React components. I also wanted the results flow to remain extensible for future public shareable URLs.
+
+#### What Was Useful
+
+The output helped with:
+
+* Results page structure
+* Presentation-focused component boundaries
+* Currency formatting organization
+* Audit result serialization
+* Loading and error handling patterns
+
+#### What I Changed Manually
+
+Some suggested layouts leaned too heavily toward dashboard-style analytics interfaces. I simplified the hierarchy to keep the results page focused on actionable recommendations and readability.
+
+---
+
+### Prompt 2
+
+Used Gemini 3.1 Pro (Low) to improve the savings summary hero section and recommendation card UX.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am now building the visual audit results UI for an AI Spend Audit SaaS application.
+
+The audit engine already generates:
+- current monthly spend
+- optimized monthly spend
+- estimated annual savings
+- recommendation reasons
+- per-tool optimization suggestions
+
+The assignment requires:
+- a strong savings summary hero section
+- per-tool recommendation breakdowns
+- clear financial impact visibility
+- screenshot-friendly design
+
+Goal of this segment:
+Build the core audit results presentation layer.
+
+Requirements:
+- Large and clear savings hero section
+- Per-tool recommendation cards
+- Mobile responsive layout
+- B2B SaaS visual quality
+- Strong readability and hierarchy
+- Honest recommendation presentation
+
+Each recommendation card should show:
+- tool name
+- current plan
+- recommended action
+- monthly savings
+- annual savings
+- concise reasoning
+
+Please help generate:
+1. Suggested layout hierarchy for the results page
+2. Hero section UX recommendations
+3. Recommendation card structure
+4. Suggestions for:
+   - visual hierarchy
+   - savings emphasis
+   - typography
+   - responsive layout
+5. Suggestions for severity or priority indicators
+6. Recommendations for:
+   - empty states
+   - no-savings scenarios
+   - already-optimized users
+7. Suggestions for screenshot/share-friendly layouts
+
+Avoid:
+- overdesigned dashboards
+- unnecessary graphs
+- excessive animations
+- fake savings exaggeration
+
+Focus on clarity, credibility, and strong SaaS UX.
+```
+
+#### Why I Used This Prompt
+
+The assignment specifically emphasized visual quality and shareability of the audit results page, so I focused on making the savings presentation feel credible, readable, and useful rather than overly decorative.
+
+#### What Was Useful
+
+The output helped with:
+
+* Hero section hierarchy
+* Recommendation card organization
+* Responsive spacing
+* Savings visibility
+* No-savings messaging
+* Screenshot-friendly presentation
+
+#### What I Changed Manually
+
+Some visual suggestions introduced too many dashboard-style elements that distracted from the actual recommendations. I simplified the layout to emphasize readability and decision-making instead.
+
+---
+
+### Prompt 3
+
+Used Gemini 3.1 Pro (Low) to design the AI-generated summary flow and conditional CTA logic.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am integrating AI-generated summaries and conditional conversion flows into an AI Spend Audit SaaS application.
+
+Current audit engine output already includes:
+- deterministic recommendations
+- savings calculations
+- recommendation reasons
+- optimization summaries
+
+The AI layer should ONLY summarize existing deterministic outputs.
+It should NOT invent recommendations or savings numbers.
+
+Assignment requirements:
+- Generate ~100-word personalized summaries
+- Gracefully handle API failures
+- Fall back to deterministic templated summaries
+- Surface Credex prominently for high-savings users
+- Stay honest for already-optimized stacks
+
+Goal of this segment:
+Build the AI summary architecture and conversion CTA logic.
+
+Requirements:
+- Use Anthropic API or another LLM
+- Keep deterministic audit logic separate
+- Graceful fallback handling
+- Clear conditional CTA behavior
+- Maintain user trust
+
+Please help generate:
+1. Suggested AI summary architecture
+2. Best practices for:
+   - passing audit data into prompts
+   - preventing hallucinated savings
+   - fallback summary handling
+3. Suggestions for:
+   - prompt structure
+   - summary tone
+   - summary length
+4. Conditional CTA strategies for:
+   - high savings users
+   - medium savings users
+   - low/no savings users
+5. Suggestions for trustworthy conversion messaging
+6. Suggestions for handling API loading/error states
+
+Avoid:
+- AI-generated financial calculations
+- aggressive sales messaging
+- vague summaries
+- overcomplicated AI pipelines
+
+Focus on trustworthy AI-assisted summarization and realistic SaaS conversion UX.
+```
+
+#### Why I Used This Prompt
+
+The assignment explicitly required AI-generated summaries, but I wanted the recommendation logic itself to remain deterministic and explainable. I focused on using AI only as a presentation layer over already-validated audit calculations.
+
+#### What Was Useful
+
+The output helped with:
+
+* AI summary architecture
+* Fallback summary handling
+* Prompt safety considerations
+* Conditional CTA planning
+* Trustworthy conversion messaging
+* API failure handling
+
+#### What I Changed Manually
+
+Some CTA recommendations felt too sales-oriented for a utility-focused product. I adjusted the messaging to remain more transparent and aligned with the audit results themselves.
+
+---
+
+### Prompt 4
+
+Used Gemini 3.1 Pro (Low) to improve production polish, responsiveness, and accessibility for the results experience.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am polishing the results experience for an AI Spend Audit SaaS application before moving into backend persistence and public shareable URLs.
+
+Current progress:
+- Audit engine completed
+- Recommendation rules completed
+- Savings calculations completed
+- Results page architecture completed
+- AI summary integration in progress
+
+Goal of this segment:
+Improve production readiness, responsiveness, and perceived quality of the results experience.
+
+Requirements:
+- Mobile-first responsive layout
+- Screenshot-friendly presentation
+- Fast loading UX
+- Accessible UI
+- Professional SaaS polish
+- Future-ready for public shareable URLs
+
+Please help generate:
+1. Suggestions for:
+   - mobile responsiveness
+   - spacing consistency
+   - typography hierarchy
+   - loading skeletons
+   - transitions
+2. Accessibility recommendations for:
+   - screen readers
+   - semantic structure
+   - focus states
+   - contrast
+3. Suggestions for:
+   - screenshot-friendly layouts
+   - Open Graph preview readiness
+   - future public sharing support
+4. Recommendations for:
+   - optimistic loading states
+   - empty states
+   - failure states
+5. Suggestions for avoiding:
+   - layout shifts
+   - cluttered dashboards
+   - misleading savings presentation
+6. Suggestions for preparing the app for:
+   - lead capture
+   - backend persistence
+   - public result pages later
+
+Avoid:
+- unnecessary visual complexity
+- excessive animations
+- redesigning the audit engine
+- overengineering
+
+Focus on production-quality SaaS polish and maintainable frontend architecture.
+```
+
+#### Why I Used This Prompt
+
+At this stage, the core audit logic was already functioning correctly, so the focus shifted toward improving perceived quality, responsiveness, accessibility, and readiness for future sharing and backend integrations.
+
+#### What Was Useful
+
+The output helped with:
+
+* Responsive layout improvements
+* Accessibility refinements
+* Loading state UX
+* Open Graph preparation ideas
+* Screenshot-friendly structure
+* Layout consistency
+
+#### What I Changed Manually
+
+Some suggestions introduced animations and transitions that felt unnecessary for a utility-focused SaaS workflow. I simplified several interactions to prioritize speed, clarity, and maintainability.

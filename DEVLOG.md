@@ -29,3 +29,15 @@
 **Blockers / what I'm stuck on:** GitHub Actions and local Windows environments occasionally drift (e.g., `&&` in PowerShell vs Bash), and `npm install` for test dependencies took longer than expected. Had a minor slip up with some stale `any` casts in the React hook form dependency arrays, but cleaned them up with ESLint.
 
 **Plan for tomorrow:** Dive into the results dashboard UI. Map over the output of the recommendation engine and render the metrics, savings calculations, and recommendation cards in a beautiful, professional layout.
+
+## Day 4 — 2026-05-23
+
+**Hours worked:** 5
+
+**What I did:** Architected and implemented the entire Results Dashboard presentation layer. Built the core metrics summary and a scalable recommendation card system featuring dynamic severity indicators, distinct rationale displays, and split annual vs. monthly savings projections. Additionally, I successfully integrated an AI summarization layer utilizing the Vercel AI SDK to securely read the deterministic mathematical output and generate concise, professional insights. I added graceful API failure states, loading skeletons to prevent layout shifts, and a highly conditional Call-to-Action conversion pipeline that adjusts its messaging based on the user's specific savings tier. Finally, I documented the theoretical SaaS scaling architecture required for public sharing and backend persistence.
+
+**What I learned:** Offloading AI generation to a secure server route and providing it with strictly formatted, pre-calculated numbers is the best way to prevent hallucinations and maintain trust. Implementing graceful degradation (falling back to deterministic strings when the AI API fails) ensures the user experience never breaks during peak load or API rate limits. Building the UI sequentially based on the decoupled Engine made connecting the data flow incredibly smooth.
+
+**Blockers / what I'm stuck on:** Navigating AI SDK updates and dealing with minor API rate limits caused some hiccups, but having the fallback architecture in place made it a non-issue. Encountered minor TypeScript strictness issues between component property types and the engine's data model, but resolved them quickly without touching the core logic.
+
+**Plan for tomorrow:** Move into backend persistence architecture. Implement a database layer to start permanently storing audits, generating unique shareable URLs, and gating access behind a lead capture email form.
