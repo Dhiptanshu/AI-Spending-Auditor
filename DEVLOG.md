@@ -1,9 +1,13 @@
 ## Day 1 — 2026-05-20
 
 **Hours worked:** 4
+
 **What I did:** Set up the Next.js 15 project foundation with TypeScript, TailwindCSS, shadcn/ui, ESLint, and Prettier. Built the initial AI Spend Audit landing page, added route shells for the audit and results flows, and created the first lightweight frontend state architecture for persisted audit drafts.
+
 **What I learned:** Keeping the MVP architecture small makes the app easier to reason about. Local state plus localStorage is enough for the first audit flow, and the actual audit calculation logic should stay isolated from React so it can be tested or moved server-side later.
+
 **Blockers / what I'm stuck on:** Turbopack build and dev commands can hit Windows sandbox process-spawning issues, so some checks need to run outside the sandbox. Browser extensions also caused hydration warnings by injecting attributes into the HTML.
+
 **Plan for tomorrow:** Build the first usable audit form UI, wire it to the existing draft persistence hook, and keep the recommendation engine as a separate pure-function boundary.
 
 ## Day 2 — 2026-05-21
@@ -41,3 +45,15 @@
 **Blockers / what I'm stuck on:** Navigating AI SDK updates and dealing with minor API rate limits caused some hiccups, but having the fallback architecture in place made it a non-issue. Encountered minor TypeScript strictness issues between component property types and the engine's data model, but resolved them quickly without touching the core logic.
 
 **Plan for tomorrow:** Move into backend persistence architecture. Implement a database layer to start permanently storing audits, generating unique shareable URLs, and gating access behind a lead capture email form.
+
+## Day 5 — 2026-05-24
+
+**Hours worked:** 5
+
+**What I did:** Architected and implemented the entire Backend Persistence, Lead Capture, and Public Sharing pipelines. I initialized a Supabase PostgreSQL database with strict Row Level Security (RLS) to securely isolate private audit payloads from public viewers. I built a frictionless inline "Lead Capture Gate" that blurs recommendations to capture emails post-value, and wired it up to a Resend transactional email flow. I created fully server-rendered public result routes with dynamic OpenGraph metadata for rich social previews. Finally, I hardened the entire application for production by adding strict Zod environment variable validation, a bot-blocking invisible honeypot, and enforcing LLM prompt limits.
+
+**What I learned:** Supabase's upsert and Service Role APIs make building backend pipelines incredibly fast, but careful attention must be paid to React component lifecycles when moving from "draft" states to "persisted" states. Deprecated react-hook-form key mapping can cause silent performance bugs that are tricky to debug, but upgrading to the native id property solved it instantly. Strict Zod env validation is an absolute must-have before launching Next.js applications to avoid confusing runtime errors.
+
+**Blockers / what I'm stuck on:** Navigating minor PowerShell curl syntax quirks and a trailing-slash typo in a Supabase URL, but the robust server-side error logging made it trivial to diagnose. React Hook Form required a strict useRef hydration lock to prevent focus jumping, which was a great learning experience in React render lifecycles.
+
+**Plan for tomorrow:** Project complete! Ready to launch to the public, market the tool, and potentially expand the heuristic engine with more rules as user data rolls in.

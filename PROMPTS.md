@@ -951,3 +951,278 @@ The output helped with:
 #### What I Changed Manually
 
 Some suggestions introduced animations and transitions that felt unnecessary for a utility-focused SaaS workflow. I simplified several interactions to prioritize speed, clarity, and maintainability.
+
+---
+
+## Day 5
+
+### Prompt 1
+
+Used Gemini 3.1 Pro (Low) to design backend persistence and audit storage architecture.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am building backend persistence for an AI Spend Audit SaaS application.
+
+Current stack:
+- Next.js 15 App Router
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Supabase (planned)
+- Vercel deployment target
+
+Current progress:
+- Dynamic audit form completed
+- Recommendation engine completed
+- Savings calculations completed
+- AI summary generation completed
+- Results dashboard completed
+- Unit tests and CI configured
+
+Current audit flow:
+- User submits audit form
+- Form is normalized
+- Audit engine generates deterministic recommendations
+- Results page renders savings + AI summary
+
+Goal of this segment:
+Persist audit reports safely in a backend and prepare for future public sharing.
+
+Requirements:
+- Use Supabase/Postgres
+- Persist completed audit reports
+- Support future public shareable result URLs
+- Separate private vs public-safe audit data
+- Avoid storing unnecessary sensitive information
+- Keep backend architecture simple and maintainable
+
+Please help generate:
+1. Recommended database schema for:
+   - audits
+   - public reports
+   - lead capture
+2. Suggested API route architecture
+3. Suggestions for:
+   - audit serialization
+   - storing AI summaries
+   - storing normalized audit payloads
+4. Best practices for:
+   - separating public/private report data
+   - future row-level security
+   - audit identifiers
+5. Suggestions for:
+   - optimistic persistence
+   - retry-safe writes
+   - backend validation
+6. Recommended folder structure for:
+   - src/lib/supabase
+   - app/api
+
+Avoid:
+- overengineered backend architecture
+- unnecessary microservices
+- premature auth systems
+
+Focus on practical MVP-grade persistence architecture.
+```
+
+#### Why I Used This Prompt
+
+The frontend audit flow and recommendation engine were already stable, so the next step was making audit reports persistent and shareable through a real backend architecture.
+
+#### What Was Useful
+
+The output helped with:
+
+* Database schema planning
+* Audit serialization structure
+* API route organization
+* Public/private report separation
+* Retry-safe persistence patterns
+* Future row-level security considerations
+
+#### What I Changed Manually
+
+Some backend suggestions assumed a more enterprise-scale architecture than needed for the MVP. I simplified the persistence layer to keep deployment and iteration manageable.
+
+---
+
+### Prompt 2
+
+Used Gemini 3.1 Pro (Low) to design lead capture and transactional email flows.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am implementing lead capture and transactional email flows for an AI Spend Audit SaaS application.
+
+Current application behavior:
+- Users complete an AI spend audit
+- The engine generates deterministic recommendations
+- Users receive AI-generated executive summaries
+- Results pages show estimated monthly and annual savings
+
+The assignment requires:
+- Email capture AFTER value is shown
+- Trustworthy conversion flow
+- Professional SaaS experience
+
+Goal of this segment:
+Build a lightweight post-value lead capture system with transactional email support.
+
+Requirements:
+- Use Resend or similar transactional email provider
+- Capture leads only after audit results are shown
+- Keep UX lightweight and non-spammy
+- Support future CRM integrations
+- Maintain accessibility and mobile responsiveness
+
+Please help generate:
+1. Suggested lead capture flow architecture
+2. Recommended database fields for:
+   - leads
+   - captured reports
+   - conversion metadata
+3. Suggestions for:
+   - transactional confirmation emails
+   - resend/retry handling
+   - loading states
+4. Best practices for:
+   - post-value conversion UX
+   - minimizing user friction
+   - preventing duplicate submissions
+5. Suggestions for:
+   - confirmation messaging
+   - trust-building copy
+   - optional vs required fields
+6. Recommended API route structure for:
+   - lead submission
+   - email sending
+   - report linking
+
+Avoid:
+- aggressive marketing patterns
+- multi-step onboarding funnels
+- overcomplicated CRM systems
+
+Focus on practical SaaS lead capture and transactional reliability.
+```
+
+#### Why I Used This Prompt
+
+The assignment emphasized delivering value before requesting user information, so I wanted the lead capture flow to feel lightweight, trustworthy, and aligned with the audit experience itself.
+
+#### What Was Useful
+
+The output helped with:
+
+* Lead capture architecture
+* Transactional email flow planning
+* Retry-safe submission handling
+* Confirmation messaging
+* Conversion UX structure
+* API route separation
+
+#### What I Changed Manually
+
+Some suggestions introduced unnecessary onboarding complexity that felt too sales-focused for the product. I simplified the lead flow to keep the interaction friction low.
+
+---
+
+### Prompt 3
+
+Used Gemini 3.1 Pro (Low) to design public shareable audit result pages and production hardening strategies.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am building public shareable audit result pages and production hardening systems for an AI Spend Audit SaaS application.
+
+Current progress:
+- Audit engine completed
+- Results dashboard completed
+- Backend persistence in progress
+- AI summaries completed
+- Savings calculations completed
+- Lead capture system in progress
+
+Goal of this segment:
+Allow users to share audit reports publicly while improving production reliability and abuse protection.
+
+Requirements:
+- Build /results/[id]
+- Generate safe public report payloads
+- Prevent accidental PII exposure
+- Support social sharing previews
+- Improve backend reliability
+- Protect API routes from abuse
+
+Public pages should display:
+- savings summary
+- optimization recommendations
+- AI-generated summary
+- anonymized stack insights
+
+Please help generate:
+1. Recommended architecture for:
+   - public report generation
+   - shareable result pages
+   - public payload sanitization
+2. Suggestions for:
+   - generating unique report IDs
+   - separating public/private data
+   - Open Graph metadata
+   - Twitter previews
+3. Best practices for:
+   - anonymous sharing
+   - preventing sensitive data leaks
+   - report expiration or revocation
+4. Recommendations for:
+   - rate limiting
+   - honeypot protection
+   - request validation
+   - environment variable validation
+5. Suggestions for:
+   - graceful AI API failures
+   - backend logging
+   - retry-safe requests
+   - deployment readiness
+6. Suggestions for avoiding:
+   - duplicate writes
+   - accidental API cost explosions
+   - cluttered sharing UX
+
+Avoid:
+- enterprise-scale infrastructure
+- unnecessary authentication systems
+- overengineered DevOps complexity
+
+Focus on secure, production-friendly MVP deployment architecture.
+```
+
+#### Why I Used This Prompt
+
+At this stage, the application was approaching production readiness, so I focused on secure public sharing, backend reliability, and lightweight abuse prevention before deployment.
+
+#### What Was Useful
+
+The output helped with:
+
+* Public result architecture
+* Payload sanitization planning
+* Open Graph and social preview preparation
+* Rate limiting ideas
+* Deployment readiness improvements
+* Backend reliability considerations
+
+#### What I Changed Manually
+
+Some recommendations leaned toward infrastructure complexity that was unnecessary for an MVP submission. I intentionally kept abuse protection and deployment hardening lightweight and maintainable.
