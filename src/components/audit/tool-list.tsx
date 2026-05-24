@@ -4,7 +4,7 @@ import { ToolFields } from "@/components/audit/tool-fields";
 import { Button } from "@/components/ui/button";
 
 type ToolListProps = {
-  tools: { instanceId: string; key: string }[];
+  tools: { instanceId: string; id: string }[];
   onAddTool: () => void;
   onRemoveTool: (instanceId: string) => void;
 };
@@ -47,7 +47,7 @@ export function ToolList({
         ) : (
           tools.map((tool, index) => (
             <ToolFields
-              key={tool.key}
+              key={tool.id}
               index={index}
               canRemove={true}
               onRemove={() => onRemoveTool(tool.instanceId)}

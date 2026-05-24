@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,9 +53,12 @@ export function AuditFormShell() {
     mode: "onTouched",
   });
 
+  const hasInitialized = useRef(false);
+
   // Sync draft to form once on initial load
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && !hasInitialized.current) {
+      hasInitialized.current = true;
       if (draft.tools.length > 0) {
         form.reset(draft);
       } else {
@@ -65,8 +68,7 @@ export function AuditFormShell() {
         });
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaded, form, draft.tools.length]); // Intentionally omitting full draft to avoid resetting on every change
+  }, [isLoaded, form, draft]);
 
   // Sync form to persistent draft
   useEffect(() => {
@@ -80,7 +82,6 @@ export function AuditFormShell() {
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "tools",
-    keyName: "key", // use 'key' since 'id' might conflict or not be needed here
   });
 
   function addTool() {
@@ -124,7 +125,7 @@ export function AuditFormShell() {
           </CardHeader>
           <CardContent>
             <ToolList
-              tools={fields as unknown as { instanceId: string; key: string }[]}
+              tools={fields as unknown as { instanceId: string; id: string }[]}
               onAddTool={addTool}
               onRemoveTool={removeTool}
             />

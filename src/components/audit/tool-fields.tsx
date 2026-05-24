@@ -238,6 +238,7 @@ export function ToolFields({
                 <Input
                   {...field}
                   min={0}
+                  step="any"
                   inputMode="decimal"
                   type="number"
                   onChange={(event) => {
