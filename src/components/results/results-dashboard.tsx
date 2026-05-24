@@ -5,12 +5,13 @@ import { MetricsSummary } from "./metrics-summary";
 import { RecommendationList } from "./recommendation-list";
 import { AISummaryCard } from "./ai-summary-card";
 import { ConversionCTA } from "./conversion-cta";
+import { LeadCaptureGate } from "./lead-capture-gate";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 export function ResultsDashboard() {
-  const { status, report, error } = useAuditReport();
+  const { status, report, shareId, error } = useAuditReport();
 
   if (status === "loading") {
     return (
@@ -56,9 +57,10 @@ export function ResultsDashboard() {
         totalAnnualSavings={report.totalAnnualSavings}
       />
 
-      <RecommendationList recommendations={report.recommendations} />
-
-      <ConversionCTA report={report} />
+      <LeadCaptureGate shareId={shareId ?? null}>
+        <RecommendationList recommendations={report.recommendations} />
+        <ConversionCTA report={report} />
+      </LeadCaptureGate>
     </div>
   );
 }

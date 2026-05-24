@@ -5,8 +5,8 @@ import { generateAuditReport } from "@/lib/audit/engine";
 import type { AuditEngineResult } from "@/types/engine";
 
 type ReportState =
-  | { status: "loading" | "error"; report: null; error?: string }
-  | { status: "success"; report: AuditEngineResult; error?: never };
+  | { status: "loading" | "error"; report: null; shareId?: never; error?: string }
+  | { status: "success"; report: AuditEngineResult; shareId: string | null; error?: never };
 
 export function useAuditReport(): ReportState {
   const [state, setState] = useState<ReportState>({ status: "loading", report: null });
@@ -32,7 +32,7 @@ export function useAuditReport(): ReportState {
       // 2. Run the deterministic recommendation pipeline
       const report = generateAuditReport(normalized);
       
-      setState({ status: "success", report });
+      setState({ status: "success", report, shareId: null });
 
       // 3. Fire-and-forget background save to Supabase
       if (!hasSaved.current) {
@@ -46,6 +46,7 @@ export function useAuditReport(): ReportState {
         .then(data => {
           if (data.shareId) {
             console.log("Audit saved securely! Share ID:", data.shareId);
+            setState(prev => prev.status === "success" ? { ...prev, shareId: data.shareId } : prev);
           }
         })
         .catch(err => console.error("Background save failed:", err));
