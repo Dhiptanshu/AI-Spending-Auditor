@@ -30,14 +30,15 @@ export const teamInfoSchema = z.object({
   primaryUseCase: z.enum(PRIMARY_USE_CASES, {
     message: "Please select a primary use case",
   }),
-  departmentsUsingAi: z.array(z.string()),
+  departmentsUsingAi: z.array(z.string()).max(20, "Maximum of 20 departments allowed"),
 });
 
 export const auditFormSchema = z.object({
   team: teamInfoSchema,
   tools: z
     .array(aiToolSchema)
-    .min(1, "Please add at least one AI tool to audit"),
+    .min(1, "At least one tool is required")
+    .max(20, "Maximum of 20 tools allowed per audit"),
 });
 
 export type AuditFormValues = z.infer<typeof auditFormSchema>;

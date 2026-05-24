@@ -1,20 +1,27 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { env } from "@/lib/env";
 
 // Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 // We use the Service Role Key here because this is a secure server environment,
 // and we need to bypass RLS to UPDATE the audit row with the new lead ID.
 const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
+  env.NEXT_PUBLIC_SUPABASE_URL,
+  env.SUPABASE_SERVICE_ROLE_KEY
 );
 
 export async function POST(req: Request) {
   try {
-    const { email, shareId } = await req.json();
+    const { email, shareId, website } = await req.json();
+
+    // Honeypot trap: bots blindly fill all fields. Humans can't see this field.
+    if (website) {
+      console.warn("Honeypot triggered, dropping bot request quietly:", email);
+      return NextResponse.json({ success: true });
+    }
 
     if (!email || !shareId) {
       return NextResponse.json({ error: "Email and shareId are required" }, { status: 400 });
@@ -46,8 +53,7 @@ export async function POST(req: Request) {
 
     // 3. Send Transactional Email via Resend
     try {
-      // In production, NEXT_PUBLIC_APP_URL should be set to your real domain (e.g. https://credex.rocks)
-      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+      const baseUrl = env.NEXT_PUBLIC_APP_URL;
       const auditUrl = `${baseUrl}/results/${shareId}`;
       
       await resend.emails.send({
@@ -71,8 +77,9 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Lead Capture API Error:", error);
-    return NextResponse.json({ error: "Internal Server Error", details: error.message }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Unknown Error";
+    return NextResponse.json({ error: "Internal Server Error", details: message }, { status: 500 });
   }
 }

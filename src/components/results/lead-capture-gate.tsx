@@ -14,6 +14,7 @@ type LeadCaptureGateProps = {
 export function LeadCaptureGate({ shareId, children }: LeadCaptureGateProps) {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState(""); // Honeypot field
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -25,7 +26,7 @@ export function LeadCaptureGate({ shareId, children }: LeadCaptureGateProps) {
       const res = await fetch("/api/lead/capture", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, shareId }),
+        body: JSON.stringify({ email, shareId, website }),
       });
 
       if (!res.ok) {
@@ -36,7 +37,7 @@ export function LeadCaptureGate({ shareId, children }: LeadCaptureGateProps) {
       toast.success("Report unlocked!", {
         description: "We've also emailed you a permanent link to this report.",
       });
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong.", {
         description: "Please try again in a moment.",
       });
@@ -77,6 +78,16 @@ export function LeadCaptureGate({ shareId, children }: LeadCaptureGateProps) {
             </div>
 
             <form onSubmit={onSubmit} className="flex flex-col gap-3">
+              <div className="hidden" aria-hidden="true">
+                <Input
+                  type="text"
+                  name="company_website"
+                  tabIndex={-1}
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
               <Input
                 type="email"
                 required
