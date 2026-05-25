@@ -7,6 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import { AISummaryCard } from "@/components/results/ai-summary-card";
 import { MetricsSummary } from "@/components/results/metrics-summary";
 import { RecommendationList } from "@/components/results/recommendation-list";
+import { PdfExportButton } from "@/components/results/pdf-export-button";
 import { buttonVariants } from "@/components/ui/button";
 import type { AuditEngineResult } from "@/types/engine";
 
@@ -76,10 +77,13 @@ export default async function PublicSharePage({ params }: Props) {
             Generated on {new Date(data.created_at).toLocaleDateString()}
           </p>
         </div>
-        <Link href="/" className={buttonVariants({ variant: "outline" })}>
-          Run your own audit
-          <ArrowRight className="ml-2 size-4" />
-        </Link>
+        <div className="flex items-center gap-2">
+          <PdfExportButton report={report} />
+          <Link href="/" className={buttonVariants({ variant: "outline" })}>
+            Run your own audit
+            <ArrowRight className="ml-2 size-4" />
+          </Link>
+        </div>
       </div>
 
       <AISummaryCard report={report} />

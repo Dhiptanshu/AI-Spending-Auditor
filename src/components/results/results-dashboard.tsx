@@ -9,6 +9,7 @@ import { LeadCaptureGate } from "./lead-capture-gate";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { PdfExportButton } from "./pdf-export-button";
 
 export function ResultsDashboard() {
   const { status, report, shareId, error } = useAuditReport();
@@ -43,10 +44,13 @@ export function ResultsDashboard() {
             Review your optimized spend and actionable recommendations.
           </p>
         </div>
-        <Link href="/" className={buttonVariants({ variant: "outline", size: "sm" })}>
-          <ArrowLeft className="mr-2 size-4" />
-          Edit inputs
-        </Link>
+        <div className="flex items-center gap-2">
+          <PdfExportButton report={report} />
+          <Link href="/" className={buttonVariants({ variant: "outline", size: "sm" })}>
+            <ArrowLeft className="mr-2 size-4" />
+            Edit inputs
+          </Link>
+        </div>
       </div>
 
       <AISummaryCard report={report} />
