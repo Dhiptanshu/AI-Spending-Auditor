@@ -1,13 +1,5 @@
 import { FileSearch, ShieldCheck, WalletCards } from "lucide-react";
-
 import { SectionContainer } from "@/components/landing/section-container";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 const capabilities = [
   {
@@ -32,36 +24,39 @@ const capabilities = [
 
 export function ExplanationSection() {
   return (
-    <SectionContainer id="overview" className="bg-muted/30 border-y">
-      <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        <div className="space-y-3">
-          <p className="text-muted-foreground text-sm font-medium">
+    <SectionContainer id="overview" className="border-y border-border/60 bg-muted/20">
+      <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+        <div className="space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             What the tool does
           </p>
-          <h2 className="text-3xl font-semibold tracking-normal text-balance">
+          <h2 className="text-2xl font-semibold leading-tight tracking-tight text-balance">
             A practical audit layer for AI vendor spend.
           </h2>
-          <p className="text-muted-foreground text-base leading-7">
-            The MVP focuses on helping teams collect spend data, review vendor
-            usage, and decide what needs action. It is intentionally simple:
-            clear inputs, clear findings, and a path to savings.
+          <p className="text-muted-foreground text-sm leading-7">
+            The product focuses on helping teams collect spend data, review
+            vendor usage, and decide what needs action. Clear inputs, clear
+            findings, and a path to savings.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-3">
           {capabilities.map((capability) => (
-            <Card key={capability.title}>
-              <CardHeader>
+            <div
+              key={capability.title}
+              className="group rounded-lg border border-border/70 bg-card p-5 transition-colors hover:border-border"
+            >
+              <div className="mb-4 flex size-8 items-center justify-center rounded-md border border-border/70 bg-background">
                 <capability.icon
-                  className="text-muted-foreground size-5"
+                  className="size-4 text-muted-foreground group-hover:text-foreground transition-colors"
                   aria-hidden="true"
                 />
-                <CardTitle>{capability.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{capability.description}</CardDescription>
-              </CardContent>
-            </Card>
+              </div>
+              <h3 className="mb-1.5 text-sm font-semibold">{capability.title}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                {capability.description}
+              </p>
+            </div>
           ))}
         </div>
       </div>

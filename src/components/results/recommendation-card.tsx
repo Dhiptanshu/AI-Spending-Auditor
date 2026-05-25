@@ -1,64 +1,95 @@
 import { formatCurrency } from "@/lib/audit/formatters";
 import type { AuditRecommendation } from "@/types/engine";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, CheckCircle2, Info, TrendingDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type RecommendationCardProps = {
   recommendation: AuditRecommendation;
+  index: number;
 };
 
-export function RecommendationCard({ recommendation }: RecommendationCardProps) {
-  // Icon based on confidence
-  const getConfidenceIcon = () => {
-    switch (recommendation.confidence) {
-      case "high":
-        return <CheckCircle2 className="text-green-600 size-5" />;
-      case "medium":
-        return <AlertTriangle className="text-amber-500 size-5" />;
-      case "low":
-        return <Info className="text-blue-500 size-5" />;
-      default:
-        return <Info className="text-blue-500 size-5" />;
-    }
-  };
+const confidenceConfig = {
+  high: {
+    icon: CheckCircle2,
+    color: "text-emerald-500",
+    label: "High confidence",
+    badgeCn: "border-emerald-500/20 bg-emerald-500/8 text-emerald-600 dark:text-emerald-400",
+  },
+  medium: {
+    icon: AlertTriangle,
+    color: "text-amber-500",
+    label: "Medium confidence",
+    badgeCn: "border-amber-500/20 bg-amber-500/8 text-amber-600 dark:text-amber-400",
+  },
+  low: {
+    icon: Info,
+    color: "text-blue-500",
+    label: "Low confidence",
+    badgeCn: "border-blue-500/20 bg-blue-500/8 text-blue-600 dark:text-blue-400",
+  },
+};
+
+export function RecommendationCard({
+  recommendation,
+  index,
+}: RecommendationCardProps) {
+  const conf =
+    confidenceConfig[recommendation.confidence] ?? confidenceConfig.low;
+  const ConfIcon = conf.icon;
 
   return (
-    <Card className="flex flex-col overflow-hidden transition-all hover:shadow-md">
-      <CardHeader className="pb-4">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2.5">
-              {getConfidenceIcon()}
-              <CardTitle className="text-lg leading-tight tracking-tight">
-                {recommendation.title}
-              </CardTitle>
-            </div>
-            <CardDescription className="text-base text-foreground/90 mt-1 max-w-2xl">
+    <div className="group rounded-lg border border-border/70 bg-card transition-colors hover:border-border overflow-hidden">
+      {/* Card header */}
+      <div className="flex flex-col gap-3 p-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex items-start gap-3 min-w-0">
+          {/* Step number */}
+          <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded border border-border/70 bg-muted text-xs font-semibold tabular-nums text-muted-foreground">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <div className="space-y-1 min-w-0">
+            <h3 className="text-sm font-semibold leading-snug">
+              {recommendation.title}
+            </h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
               {recommendation.description}
-            </CardDescription>
+            </p>
           </div>
-          
-          {recommendation.monthlySavings > 0 && (
-            <div className="flex shrink-0 flex-col items-end gap-1">
-              <Badge variant="secondary" className="bg-green-100 text-green-800 hover:bg-green-100/80 dark:bg-green-900/40 dark:text-green-400 whitespace-nowrap px-3 py-1.5 text-sm font-semibold shadow-sm">
-                <TrendingDown className="mr-1.5 size-4" />
-                Save {formatCurrency(recommendation.annualSavings)}/yr
-              </Badge>
-              <span className="text-muted-foreground pr-1 text-xs font-medium">
-                ({formatCurrency(recommendation.monthlySavings)}/mo)
-              </span>
-            </div>
-          )}
         </div>
-      </CardHeader>
-      
-      <CardContent className="mt-auto border-t bg-muted/40 px-6 py-4 dark:bg-muted/10">
-        <div className="flex items-start gap-2 text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground/80">Rationale:</span>
-          <span className="leading-relaxed">{recommendation.rationale}</span>
+
+        {/* Savings badge */}
+        {recommendation.monthlySavings > 0 && (
+          <div className="flex shrink-0 flex-col items-start gap-1 sm:items-end">
+            <Badge
+              variant="outline"
+              className="border-emerald-500/25 bg-emerald-500/8 text-emerald-600 dark:text-emerald-400 whitespace-nowrap px-2.5 py-1 text-xs font-semibold"
+            >
+              <TrendingDown className="mr-1 size-3" />
+              {formatCurrency(recommendation.annualSavings)}/yr
+            </Badge>
+            <span className="text-xs text-muted-foreground tabular-nums">
+              {formatCurrency(recommendation.monthlySavings)}/mo
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Footer rationale */}
+      <div className="border-t border-border/60 bg-muted/20 px-5 py-3">
+        <div className="flex items-start gap-2 text-xs">
+          <ConfIcon
+            className={cn("mt-0.5 size-3 shrink-0", conf.color)}
+            aria-hidden="true"
+          />
+          <span className="text-muted-foreground leading-relaxed">
+            <span className="font-medium text-foreground/70 mr-1">
+              {conf.label}:
+            </span>
+            {recommendation.rationale}
+          </span>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

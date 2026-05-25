@@ -1,5 +1,5 @@
 import { formatCurrency } from "@/lib/audit/formatters";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowDown } from "lucide-react";
 
 type MetricsSummaryProps = {
   currentMonthlySpend: number;
@@ -12,46 +12,67 @@ export function MetricsSummary({
   optimizedMonthlySpend,
   totalAnnualSavings,
 }: MetricsSummaryProps) {
-  return (
-    <div className="grid gap-4 sm:grid-cols-3">
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-muted-foreground text-sm font-medium">
-            Current Monthly Spend
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {formatCurrency(currentMonthlySpend)}
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-muted-foreground text-sm font-medium">
-            Optimized Monthly Spend
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {formatCurrency(optimizedMonthlySpend)}
-          </div>
-        </CardContent>
-      </Card>
+  const savingsPct =
+    currentMonthlySpend > 0
+      ? Math.round(
+          ((currentMonthlySpend - optimizedMonthlySpend) / currentMonthlySpend) * 100,
+        )
+      : 0;
 
-      <Card className={totalAnnualSavings > 0 ? "border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-950/20" : ""}>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-green-700 dark:text-green-400">
-            Total Annual Savings
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-            {formatCurrency(totalAnnualSavings)}
+  const metrics = [
+    {
+      label: "Current monthly",
+      value: formatCurrency(currentMonthlySpend),
+      sub: "Active spend",
+      highlight: false,
+    },
+    {
+      label: "Optimized monthly",
+      value: formatCurrency(optimizedMonthlySpend),
+      sub: savingsPct > 0 ? `${savingsPct}% reduction` : "No change found",
+      highlight: false,
+    },
+    {
+      label: "Annual savings",
+      value: formatCurrency(totalAnnualSavings),
+      sub: "Potential recovery",
+      highlight: totalAnnualSavings > 0,
+    },
+  ];
+
+  return (
+    <div className="grid gap-px rounded-xl border border-border/70 bg-border/70 overflow-hidden sm:grid-cols-3">
+      {metrics.map((m) => (
+        <div
+          key={m.label}
+          className={`flex flex-col gap-1 bg-card px-5 py-4 ${
+            m.highlight ? "bg-emerald-950/10 dark:bg-emerald-950/20" : ""
+          }`}
+        >
+          <p
+            className={`text-xs font-medium uppercase tracking-wider ${
+              m.highlight
+                ? "text-emerald-600 dark:text-emerald-400"
+                : "text-muted-foreground"
+            }`}
+          >
+            {m.label}
+          </p>
+          <div className="flex items-baseline gap-2">
+            <span
+              className={`text-2xl font-semibold tabular-nums tracking-tight ${
+                m.highlight ? "text-emerald-600 dark:text-emerald-400" : ""
+              }`}
+            >
+              {m.value}
+            </span>
+            {m.highlight && totalAnnualSavings > 0 && (
+              <ArrowDown className="size-3.5 text-emerald-500 shrink-0" />
+            )}
           </div>
-        </CardContent>
-      </Card>
+          <p className="text-xs text-muted-foreground">{m.sub}</p>
+        </div>
+      ))}
     </div>
   );
 }

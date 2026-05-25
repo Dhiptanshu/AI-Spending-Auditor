@@ -1,32 +1,32 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
 import { SectionContainer } from "@/components/landing/section-container";
 import { buttonVariants } from "@/components/ui/button";
 
 export function CtaSection() {
   return (
     <SectionContainer className="py-12">
-      <div className="bg-card flex flex-col items-start justify-between gap-6 rounded-lg border p-6 sm:p-8 md:flex-row md:items-center">
-        <div className="max-w-2xl space-y-2">
-          <h2 className="text-2xl font-semibold tracking-normal">
-            Ready to map your AI spend?
-          </h2>
-          <p className="text-muted-foreground text-sm leading-6">
-            Start with a simple audit flow and build toward deeper reporting as
-            the product matures.
-          </p>
+      <div className="rounded-xl border border-border/70 bg-card px-8 py-10 sm:px-10">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-lg space-y-1.5">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Ready to map your AI spend?
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Start with a simple audit flow. No account required.
+            </p>
+          </div>
+          <Link
+            href="/audit"
+            className={buttonVariants({
+              size: "default",
+              className: "h-9 shrink-0 px-5 text-sm font-medium",
+            })}
+          >
+            Start audit
+            <ArrowRight className="ml-1.5 size-3.5" aria-hidden="true" />
+          </Link>
         </div>
-        <Link
-          href="/audit"
-          className={buttonVariants({
-            size: "lg",
-            className: "h-10 w-full px-4 sm:w-auto",
-          })}
-        >
-          Start audit
-          <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
       </div>
     </SectionContainer>
   );

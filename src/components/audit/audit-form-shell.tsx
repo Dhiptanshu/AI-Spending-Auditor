@@ -102,28 +102,27 @@ export function AuditFormShell() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Team context</CardTitle>
-            <CardDescription>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <Card className="border-border/70">
+          <CardHeader className="pb-3 pt-5 px-5">
+            <CardTitle className="text-sm font-semibold">Team context</CardTitle>
+            <CardDescription className="text-xs">
               Start with the team size and primary reason the team uses AI tools.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-5 pb-5">
             <TeamInfoFields />
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Tool stack</CardTitle>
-            <CardDescription>
-              Capture each tool, plan, monthly spend, and seat count for the
-              audit.
+        <Card className="border-border/70">
+          <CardHeader className="pb-3 pt-5 px-5">
+            <CardTitle className="text-sm font-semibold">Tool stack</CardTitle>
+            <CardDescription className="text-xs">
+              Capture each tool, plan, monthly spend, and seat count for the audit.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-5 pb-5">
             <ToolList
               tools={fields as unknown as { instanceId: string; id: string }[]}
               onAddTool={addTool}
@@ -132,14 +131,14 @@ export function AuditFormShell() {
           </CardContent>
         </Card>
 
-        <div className="bg-card flex flex-col items-start justify-between gap-3 rounded-lg border p-4 sm:flex-row sm:items-center">
-          <p className="text-muted-foreground text-sm">
+        <div className="flex flex-col items-start justify-between gap-3 rounded-lg border border-border/70 bg-card p-4 sm:flex-row sm:items-center">
+          <p className="text-xs text-muted-foreground">
             {storageError ??
               (isLoaded
-                ? "Draft changes are saved in this browser."
+                ? "Draft saved in this browser."
                 : "Loading saved draft...")}
           </p>
-          <Button type="submit" className="w-full sm:w-auto" disabled={!isLoaded || form.formState.isSubmitting}>
+          <Button type="submit" size="sm" className="h-9 px-5 w-full text-xs font-medium sm:w-auto" disabled={!isLoaded || form.formState.isSubmitting}>
             {form.formState.isSubmitting ? "Analyzing stack..." : "Generate audit"}
           </Button>
         </div>

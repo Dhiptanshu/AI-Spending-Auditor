@@ -9,30 +9,35 @@ type RecommendationListProps = {
 export function RecommendationList({ recommendations }: RecommendationListProps) {
   if (recommendations.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-12 text-center">
-        <div className="bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400 mb-4 rounded-full p-4">
-          <ShieldCheck className="size-8" />
+      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border/70 bg-card/50 p-12 text-center">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/8">
+          <ShieldCheck className="size-5 text-emerald-500" />
         </div>
-        <h3 className="mb-2 text-xl font-bold">Your stack is optimized!</h3>
-        <p className="text-muted-foreground max-w-md">
-          We couldn&apos;t find any clear financial inefficiencies or unoptimized billing cycles in your declared stack. Great job.
+        <h3 className="mb-1.5 text-sm font-semibold">Stack is optimized</h3>
+        <p className="text-xs text-muted-foreground max-w-sm leading-relaxed">
+          No clear financial inefficiencies or unoptimized billing cycles found
+          in your declared stack.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-semibold tracking-tight">Actionable Recommendations</h3>
-        <p className="text-sm text-muted-foreground">
-          Based on your tool usage and seat counts, we identified the following opportunities.
-        </p>
+    <div className="space-y-5">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-semibold tracking-tight">
+            Actionable Recommendations
+          </h3>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {recommendations.length} opportunit{recommendations.length === 1 ? "y" : "ies"} identified
+          </p>
+        </div>
       </div>
-      
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
-        {recommendations.map((rec) => (
-          <RecommendationCard key={rec.id} recommendation={rec} />
+
+      <div className="space-y-3">
+        {recommendations.map((rec, i) => (
+          <RecommendationCard key={rec.id} recommendation={rec} index={i} />
         ))}
       </div>
     </div>

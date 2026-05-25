@@ -6,15 +6,15 @@ type PageHeadingProps = {
 
 export function PageHeading({ eyebrow, title, description }: PageHeadingProps) {
   return (
-    <div className="flex max-w-3xl flex-col gap-2">
+    <div className="flex flex-col gap-1">
       {eyebrow ? (
-        <p className="text-muted-foreground text-sm font-medium">{eyebrow}</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          {eyebrow}
+        </p>
       ) : null}
-      <h1 className="text-foreground text-3xl font-semibold tracking-normal sm:text-4xl">
-        {title}
-      </h1>
+      <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
       {description ? (
-        <p className="text-muted-foreground text-base leading-7">
+        <p className="text-xs text-muted-foreground leading-relaxed max-w-xl">
           {description}
         </p>
       ) : null}
