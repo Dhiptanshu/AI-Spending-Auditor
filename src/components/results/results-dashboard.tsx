@@ -4,6 +4,7 @@ import { useAuditReport } from "@/hooks/use-audit-report";
 import { MetricsSummary } from "./metrics-summary";
 import { RecommendationList } from "./recommendation-list";
 import { AISummaryCard } from "./ai-summary-card";
+import { BenchmarkCard } from "./benchmark-card";
 import { ConversionCTA } from "./conversion-cta";
 import { LeadCaptureGate } from "./lead-capture-gate";
 import { buttonVariants } from "@/components/ui/button";
@@ -60,6 +61,8 @@ export function ResultsDashboard() {
         optimizedMonthlySpend={report.optimizedMonthlySpend}
         totalAnnualSavings={report.totalAnnualSavings}
       />
+
+      <BenchmarkCard benchmark={report.benchmark} />
 
       <LeadCaptureGate shareId={shareId ?? null}>
         <RecommendationList recommendations={report.recommendations} />

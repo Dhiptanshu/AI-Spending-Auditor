@@ -1,5 +1,6 @@
 import type { PrimaryUseCase } from "@/config/audit-options";
 import type { BillingCycle } from "@/types/audit";
+import type { BenchmarkResult } from "@/types/benchmark";
 
 export type PricingSource = "official" | "custom-enterprise" | "user-override";
 
@@ -72,6 +73,7 @@ export type AuditEngineResult = {
   totalMonthlySavings: number;
   totalAnnualSavings: number;
   recommendations: AuditRecommendation[];
+  benchmark: BenchmarkResult;
 };
 
 export type AuditRule = (payload: NormalizedAuditPayload) => AuditRecommendation[];

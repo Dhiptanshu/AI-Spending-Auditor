@@ -6,6 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 
 import { AISummaryCard } from "@/components/results/ai-summary-card";
 import { MetricsSummary } from "@/components/results/metrics-summary";
+import { BenchmarkCard } from "@/components/results/benchmark-card";
 import { RecommendationList } from "@/components/results/recommendation-list";
 import { PdfExportButton } from "@/components/results/pdf-export-button";
 import { buttonVariants } from "@/components/ui/button";
@@ -93,6 +94,8 @@ export default async function PublicSharePage({ params }: Props) {
         optimizedMonthlySpend={report.optimizedMonthlySpend}
         totalAnnualSavings={report.totalAnnualSavings}
       />
+
+      <BenchmarkCard benchmark={report.benchmark} />
 
       <RecommendationList recommendations={report.recommendations} />
 

@@ -1,4 +1,5 @@
 import { auditRules } from "./rules";
+import { calculateBenchmark } from "./benchmark-engine";
 import type { NormalizedAuditPayload, AuditEngineResult } from "@/types/engine";
 
 export function generateAuditReport(payload: NormalizedAuditPayload): AuditEngineResult {
@@ -21,11 +22,15 @@ export function generateAuditReport(payload: NormalizedAuditPayload): AuditEngin
   const currentMonthlySpend = payload.aggregates.totalDeclaredSpend;
   const optimizedMonthlySpend = Math.max(0, currentMonthlySpend - totalMonthlySavings);
 
+  // 5. Calculate industry benchmarks
+  const benchmark = calculateBenchmark(payload);
+
   return {
     currentMonthlySpend,
     optimizedMonthlySpend,
     totalMonthlySavings,
     totalAnnualSavings,
     recommendations: sortedRecommendations,
+    benchmark,
   };
 }

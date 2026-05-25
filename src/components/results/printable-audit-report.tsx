@@ -1,6 +1,7 @@
 "use client";
 
 import { MetricsSummary } from "./metrics-summary";
+import { BenchmarkCard } from "./benchmark-card";
 import { RecommendationList } from "./recommendation-list";
 import type { AuditEngineResult } from "@/types/engine";
 
@@ -23,6 +24,10 @@ export function PrintableAuditReport({ report }: { report: AuditEngineResult }) 
             totalAnnualSavings={report.totalAnnualSavings}
           />
         </div>
+      </div>
+
+      <div className="mb-8 print:break-inside-avoid">
+        <BenchmarkCard benchmark={report.benchmark} />
       </div>
 
       <div className="mb-8">
