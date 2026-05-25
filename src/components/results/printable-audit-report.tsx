@@ -10,7 +10,7 @@ export function PrintableAuditReport({ report }: { report: AuditEngineResult }) 
     <div className="text-black bg-white w-full">
       <div className="mb-8 border-b pb-4">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">AI Spend Audit Report</h1>
-        <p className="text-slate-500 mt-2">
+        <p className="text-slate-500 mt-2" suppressHydrationWarning>
           Generated on {new Date().toLocaleDateString()}
         </p>
       </div>

@@ -43,7 +43,7 @@ export function BenchmarkCard({ benchmark }: { benchmark: BenchmarkResult }) {
           </div>
           <div 
             className="absolute -translate-x-1/2 whitespace-nowrap mt-4 text-foreground font-bold"
-            style={{ left: `${userPositionPercent}%` }}
+            style={{ left: `clamp(15%, ${userPositionPercent}%, 85%)` }}
           >
             You: ${Math.round(benchmark.spendPerSeat)}/user
           </div>

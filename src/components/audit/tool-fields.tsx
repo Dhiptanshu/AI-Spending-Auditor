@@ -31,12 +31,12 @@ export function ToolFields({
 }: ToolFieldsProps) {
   const { control, setValue, getValues } = useFormContext<AuditFormValues>();
 
-  const currentTool = useWatch({
+  const currentTool = (useWatch({
     control,
     name: `tools.${index}`,
-  }) as AiTool;
+  }) || getValues(`tools.${index}`)) as AiTool;
 
-  if (!currentTool) return null;
+  if (!currentTool) return <div className="min-h-[200px]" />;
 
   const selectedTool = getToolConfig(currentTool.toolId);
   const selectedPlan = selectedTool?.plans.find(

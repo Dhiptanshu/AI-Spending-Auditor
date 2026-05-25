@@ -12,9 +12,9 @@ export function PdfExportButton({ report }: { report: AuditEngineResult }) {
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
-    contentRef: () => componentRef.current,
+    contentRef: componentRef,
     documentTitle: "AI-Spend-Audit-Report",
-    onBeforeGetContent: async () => {
+    onBeforePrint: async () => {
       setIsGenerating(true);
       await new Promise((resolve) => setTimeout(resolve, 300));
     },
@@ -28,10 +28,10 @@ export function PdfExportButton({ report }: { report: AuditEngineResult }) {
 
   return (
     <>
-      <Button 
-        variant="outline" 
-        size="sm" 
-        onClick={() => handlePrint()} 
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => handlePrint()}
         disabled={isGenerating}
       >
         {isGenerating ? (

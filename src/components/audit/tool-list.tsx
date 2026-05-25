@@ -47,7 +47,7 @@ export function ToolList({
         ) : (
           tools.map((tool, index) => (
             <ToolFields
-              key={tool.id}
+              key={tool.instanceId}
               index={index}
               canRemove={true}
               onRemove={() => onRemoveTool(tool.instanceId)}
