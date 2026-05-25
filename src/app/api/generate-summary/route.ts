@@ -1,4 +1,4 @@
-import { openai } from "@ai-sdk/openai";
+import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { NextResponse } from "next/server";
 import { formatCurrency } from "@/lib/audit/formatters";
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     `;
 
     const { text } = await generateText({
-      model: openai("gpt-4o-mini"),
+      model: google("gemini-2.5-flash"),
       system: "You are an impartial AI spend auditor. Summarize the user's financial audit data in strictly 3 short sentences. Tone: Professional, B2B SaaS. Do not perform math, invent numbers, or sound like an aggressive salesperson. Simply explain why they are saving money based ONLY on the provided rationale.",
       prompt: `Write a summary for the following audit results:\n${promptContext}`,
     });

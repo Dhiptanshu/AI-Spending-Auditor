@@ -6,7 +6,7 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 ![Resend](https://img.shields.io/badge/Resend-black?style=for-the-badge&logo=maildotru&logoColor=white)
-![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)
 
 AI Spend Audit is a lightweight SaaS style web application that helps startups and engineering teams evaluate whether they are overspending on AI tooling such as Cursor, ChatGPT, Claude, Copilot, Gemini, and API providers. Users can enter their current plans, spend, and team usage patterns to receive optimization recommendations and estimated savings opportunities.
 
@@ -23,7 +23,7 @@ The project is built as a production ready MVP with a focus on practical audit l
 * **Supabase (PostgreSQL):** Used for database persistence. It provides secure data storage, easy integrations, and strict Row Level Security to isolate private audit payloads from public viewers.
 
 ### External APIs
-* **OpenAI API:** Used exclusively for generating concise Executive Summaries based strictly on deterministic mathematical outputs. This prevents hallucinations and maintains trust.
+* **Gemini API:** Used exclusively for generating concise Executive Summaries based strictly on deterministic mathematical outputs. This prevents hallucinations and maintains trust.
 * **Resend API:** Used for transactional email delivery. It handles sending the final public shareable links to users quickly and reliably.
 
 ## Project Structure
