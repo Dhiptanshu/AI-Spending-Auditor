@@ -1,7 +1,7 @@
 import { ResultsDashboard } from "@/components/results/results-dashboard";
 
 export const metadata = {
-  title: "Audit Results | AI Spend Auditor",
+  title: "Audit Results | AI Spending Auditor",
   description: "Review your optimized AI spend and savings recommendations.",
 };
 

@@ -14,10 +14,7 @@ export function LandingHeader() {
           href="/"
           className="flex items-center gap-2 text-sm font-semibold tracking-tight"
         >
-          <span className="inline-flex size-6 items-center justify-center rounded bg-foreground text-background text-xs font-bold">
-            C
-          </span>
-          Credex
+          Frugal | AI Spending Audit
         </Link>
 
         <nav aria-label="Primary navigation" className="hidden gap-6 md:flex">

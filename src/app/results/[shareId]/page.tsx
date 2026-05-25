@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .single();
 
   if (error || !data) {
-    return { title: "Audit Not Found | Credex" };
+    return { title: "Audit Not Found | Frugal" };
   }
 
   const result = data.engine_result as AuditEngineResult;
@@ -44,10 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }).format(result.totalAnnualSavings);
 
   return {
-    title: `AI Spend Audit: ${savings} in Annual Savings | Credex`,
+    title: `AI Spending Audit: ${savings} in Annual Savings | Frugal`,
     description: "View the full itemized breakdown of this AI stack optimization.",
     openGraph: {
-      title: `${savings} in Annual Savings | Credex AI Audit`,
+      title: `${savings} in Annual Savings | Frugal AI Audit`,
       description: "View the full itemized breakdown of this AI stack optimization.",
     },
   };

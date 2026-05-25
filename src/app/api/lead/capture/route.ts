@@ -58,16 +58,16 @@ export async function POST(req: Request) {
       
       await resend.emails.send({
         // Note: Resend requires a verified domain to send emails. 'onboarding@resend.dev' works for testing to your own email.
-        from: "Credex <onboarding@resend.dev>",
+        from: "Frugal <onboarding@resend.dev>",
         to: email,
-        subject: "Your AI Spend Audit Results",
+        subject: "Your AI Spending Audit Results",
         html: `
-          <h2>Your AI Spend Audit is ready!</h2>
+          <h2>Your AI Spending Audit is ready!</h2>
           <p>Hi there,</p>
-          <p>Thank you for using Credex. Your personalized AI spend audit and savings breakdown has been securely generated.</p>
+          <p>Thank you for using Frugal. Your personalized AI Spending Audit and savings breakdown has been securely generated.</p>
           <p><strong><a href="${auditUrl}">Click here to view your full results</a></strong></p>
           <br />
-          <p>Best,<br/>The Credex Team</p>
+          <p>Best,<br/>The Frugal Team</p>
         `,
       });
     } catch (emailError) {

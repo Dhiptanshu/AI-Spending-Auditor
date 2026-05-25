@@ -7,7 +7,7 @@ export default function AuditPage() {
     <AppShell>
       <div className="space-y-6">
         <PageHeading
-          title="Start AI spend audit"
+          title="Start AI Spending Audit"
           description="Enter your team context and AI tool spend to prepare a savings and risk review."
         />
         <AuditFormShell />

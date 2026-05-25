@@ -13,7 +13,7 @@ export function PdfExportButton({ report }: { report: AuditEngineResult }) {
 
   const handlePrint = useReactToPrint({
     contentRef: componentRef,
-    documentTitle: "AI-Spend-Audit-Report",
+    documentTitle: "AI-Spending-Audit-Report",
     onBeforePrint: async () => {
       setIsGenerating(true);
       await new Promise((resolve) => setTimeout(resolve, 300));

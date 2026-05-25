@@ -9,7 +9,7 @@ export default function DashboardPage() {
       <div className="space-y-6">
         <PageHeading
           title="Dashboard"
-          description="A lightweight route shell for the core AI spend audit overview."
+          description="A lightweight route shell for the core AI Spending Audit overview."
         />
         <SpendSummary monthlySpend={0} potentialSavings={0} />
         <RiskScoreCard level="low" score={0} />

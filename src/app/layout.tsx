@@ -17,19 +17,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Credex | AI Spend Audit",
-    template: "%s | Credex AI Spend Audit",
+    default: "Frugal | AI Spending Audit",
+    template: "%s | Frugal AI Spending Audit",
   },
   description: "Identify redundant tools, negotiate better enterprise tiers, and instantly calculate your team's total AI savings.",
   openGraph: {
-    title: "Credex | Free AI Spend Audit",
+    title: "Frugal | Free AI Spending Audit",
     description: "Instantly calculate your team's wasted AI spend. Find redundancies across ChatGPT, Claude, Cursor, and 50+ other tools.",
     type: "website",
-    siteName: "Credex",
+    siteName: "Frugal",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Credex | Free AI Spend Audit",
+    title: "Frugal | Free AI Spending Audit",
     description: "Instantly calculate your team's wasted AI spend and optimize your SaaS stack.",
   },
 };

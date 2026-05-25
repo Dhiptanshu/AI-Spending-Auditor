@@ -22,7 +22,7 @@ export function ConversionCTA({ report }: { report: AuditEngineResult }) {
               Don&apos;t leave money on the table. Automate these savings and prevent future seat sprawl with Credex.
             </p>
           </div>
-          <Link href="https://credex.rocks" className={cn(buttonVariants({ size: "lg" }), "bg-green-600 text-white hover:bg-green-700 w-full shrink-0 sm:w-auto")}>
+          <Link href="https://Credex.rocks" className={cn(buttonVariants({ size: "lg" }), "bg-green-600 text-white hover:bg-green-700 w-full shrink-0 sm:w-auto")}>
             Get Credex to automate
             <ArrowRight className="ml-2 size-4" />
           </Link>
@@ -44,7 +44,7 @@ export function ConversionCTA({ report }: { report: AuditEngineResult }) {
               Your stack is 100% optimized. Prevent shadow IT and future seat overlap as your team scales by using Credex Monitoring.
             </p>
           </div>
-          <Link href="https://credex.rocks" className={cn(buttonVariants({ size: "lg", variant: "outline" }), "w-full shrink-0 sm:w-auto")}>
+          <Link href="https://Credex.rocks" className={cn(buttonVariants({ size: "lg", variant: "outline" }), "w-full shrink-0 sm:w-auto")}>
             Try Credex Monitoring
           </Link>
         </CardContent>
@@ -65,7 +65,7 @@ export function ConversionCTA({ report }: { report: AuditEngineResult }) {
             Your stack is relatively healthy, but as you add seats, overlap will grow. Keep your AI ROI positive.
           </p>
         </div>
-        <Link href="https://credex.rocks" className={cn(buttonVariants({ size: "lg" }), "bg-indigo-600 text-white hover:bg-indigo-700 w-full shrink-0 sm:w-auto")}>
+        <Link href="https://Credex.rocks" className={cn(buttonVariants({ size: "lg" }), "bg-indigo-600 text-white hover:bg-indigo-700 w-full shrink-0 sm:w-auto")}>
           Start Tracking
           <ArrowRight className="ml-2 size-4" />
         </Link>

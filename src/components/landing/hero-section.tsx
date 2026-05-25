@@ -26,7 +26,7 @@ export function HeroSection() {
               Audit AI spend before it becomes a finance problem.
             </h1>
             <p className="text-muted-foreground max-w-lg text-base leading-7">
-              AI Spend Audit helps teams review vendors, usage, risk, and savings
+              AI Spending Audit helps teams review vendors, usage, risk, and savings
               opportunities from one focused workflow.
             </p>
           </div>
