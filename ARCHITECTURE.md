@@ -70,3 +70,39 @@ If this MVP was launched successfully and needed to handle 10,000 audits per day
    Our `PRICING_CONFIG` is currently hardcoded in a TypeScript file. At scale, SaaS pricing changes daily. We would abstract this into a CMS or a specialized Postgres table that a product team can update dynamically without requiring a code deployment.
 4. **User Auth & Multi-tenant Workspaces:**
    We would integrate Clerk or NextAuth so multiple managers from the same startup could log in and collaboratively edit a centralized company audit sheet.
+
+## Architectural Principles
+
+Several principles guided the MVP architecture:
+
+1. Deterministic business logic over AI-generated calculations
+2. Clear separation between UI state and financial logic
+3. Pure-function recommendation pipelines for testability
+4. Minimal infrastructure complexity during MVP validation
+5. Progressive enhancement instead of premature optimization
+
+## Why AI Was Isolated From Financial Logic
+
+LLMs were intentionally restricted to summary generation and explanation layers.
+
+All pricing calculations, savings recommendations, and optimization decisions remain deterministic TypeScript functions.
+
+This separation prevents hallucinated financial advice while still allowing AI to improve readability and user experience.
+
+## MVP Tradeoffs
+
+Several intentional tradeoffs were made to keep the project focused:
+
+- Local-first draft persistence before introducing authentication
+- Static pricing metadata before building dynamic vendor ingestion
+- Lightweight heuristics instead of opaque ML-based recommendations
+- Serverless API routes instead of long-running infrastructure
+- Public sharing via sanitized snapshots rather than authenticated dashboards
+
+## Security Considerations
+
+Public report routes intentionally expose only sanitized recommendation data.
+
+Sensitive payloads, lead metadata, and internal audit structures remain private within Supabase tables protected by Row Level Security (RLS).
+
+Environment variables are validated during application startup to prevent partially configured deployments.

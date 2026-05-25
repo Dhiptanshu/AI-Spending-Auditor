@@ -37,3 +37,38 @@ This module validates the recommendation logic for identifying "ghost seats" or 
   - **Purpose**: Asserts that when a strictly positive `spendDiscrepancyAmount` is identified, a high-confidence recommendation is generated to investigate the overpayment.
 - **Test 6: Safe Ignorance of Legacy Pricing (Negative Discrepancy)**
   - **Purpose**: A critical edge-case test. It asserts that if the user's declared spend is *less* than official pricing (e.g., custom enterprise deal, legacy pricing), the rule safely ignores it and does not falsely accuse the user of overpaying.
+
+## Why the Engine Was Tested Independently
+
+The audit engine was intentionally designed as a pure TypeScript pipeline completely decoupled from React components and browser state.
+
+This allowed the recommendation logic to be tested deterministically without mocking the DOM, browser APIs, or asynchronous UI interactions.
+
+Because the savings calculations directly influence financial recommendations, deterministic reproducibility was prioritized over UI-level integration testing during the MVP stage.
+
+## Critical Edge Cases Covered
+
+The suite intentionally tests edge cases that could create misleading financial recommendations:
+
+- Negative pricing discrepancies caused by legacy enterprise discounts
+- Existing annual billing plans incorrectly receiving duplicate optimization recommendations
+- Tools with custom pricing overrides
+- Zero-savings audit scenarios
+- Empty recommendation arrays
+- Mixed billing cycles across tools
+
+## Continuous Integration Strategy
+
+GitHub Actions automatically runs linting, typechecking, and the Vitest suite on every push.
+
+This ensures recommendation logic changes cannot silently introduce incorrect financial calculations before deployment.
+
+## Future Test Expansion
+
+If the project evolved beyond MVP scope, the next testing priorities would include:
+
+- End-to-end Playwright flows for the complete audit journey
+- API contract testing for persistence and sharing routes
+- Snapshot testing for public result pages
+- Accessibility regression testing
+- Load testing for concurrent audit execution
