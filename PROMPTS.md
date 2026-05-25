@@ -45,10 +45,10 @@ I wanted help setting up the project foundation quickly without generating the w
 
 The output helped with:
 
-* Folder organization
-* Tailwind and shadcn setup
-* TypeScript structure
-* Reusable component planning
+* Folder organization.
+* Tailwind and shadcn setup.
+* TypeScript structure.
+* Reusable component planning.
 
 It also helped standardize linting and formatting setup early.
 
@@ -94,9 +94,9 @@ The goal was to speed up layout work and component organization while still maki
 
 The generated structure gave a decent starting point for:
 
-* Section hierarchy
-* Responsive spacing
-* Reusable UI sections
+* Section hierarchy.
+* Responsive spacing.
+* Reusable UI sections.
 
 #### What Did Not Work Well
 
@@ -198,11 +198,11 @@ I wanted to finalize the data structure before continuing UI development. The au
 
 The output helped organize:
 
-* Tool and plan metadata
-* Shared pricing configuration
-* TypeScript interfaces
-* Reusable form structures
-* Future audit rule separation
+* Tool and plan metadata.
+* Shared pricing configuration.
+* TypeScript interfaces.
+* Reusable form structures.
+* Future audit rule separation.
 
 It also helped avoid duplicating pricing logic inside components.
 
@@ -262,10 +262,10 @@ The goal was to build the audit input experience incrementally while maintaining
 
 The generated suggestions helped with:
 
-* Dynamic tool row handling
-* Responsive form layouts
-* Reusable form sections
-* Mobile spacing and hierarchy
+* Dynamic tool row handling.
+* Responsive form layouts.
+* Reusable form sections.
+* Mobile spacing and hierarchy.
 
 #### What Did Not Work Well
 
@@ -310,10 +310,10 @@ The assignment specifically required form persistence across reloads, so I wante
 
 The output helped with:
 
-* Hydration-safe LocalStorage handling
-* State initialization patterns
-* Fallback parsing logic
-* Reducing unnecessary re-renders
+* Hydration-safe LocalStorage handling.
+* State initialization patterns.
+* Fallback parsing logic.
+* Reducing unnecessary re-renders.
 
 #### What I Changed Manually
 
@@ -363,11 +363,11 @@ I wanted to improve the usability of the form before continuing backend and audi
 
 The output helped improve:
 
-* Numeric input validation
-* Mobile responsiveness
-* Inline validation messaging
-* CTA clarity
-* Accessibility considerations
+* Numeric input validation.
+* Mobile responsiveness.
+* Inline validation messaging.
+* CTA clarity.
+* Accessibility considerations.
 
 #### What Did Not Work Well
 
@@ -454,11 +454,11 @@ The audit engine depends heavily on consistent pricing metadata and normalized i
 
 The output helped organize:
 
-* Pricing metadata structures
-* Billing cycle handling
-* Override pricing logic
-* Normalized audit payloads
-* Separation between form state and business logic
+* Pricing metadata structures.
+* Billing cycle handling.
+* Override pricing logic.
+* Normalized audit payloads.
+* Separation between form state and business logic.
 
 #### What I Changed Manually
 
@@ -525,11 +525,11 @@ I wanted the recommendation system to stay deterministic and explainable instead
 
 The output helped with:
 
-* Recommendation object structure
-* Savings calculation organization
-* Separation between calculation and formatting logic
-* Rule-based engine planning
-* Edge case considerations
+* Recommendation object structure.
+* Savings calculation organization.
+* Separation between calculation and formatting logic.
+* Rule-based engine planning.
+* Edge case considerations.
 
 #### What I Changed Manually
 
@@ -590,11 +590,11 @@ The recommendation rules are the core of the product, so I wanted to think caref
 
 The output helped with:
 
-* Rule prioritization ideas
-* No-savings scenarios
-* Edge case handling
-* Early unit test planning
-* Test organization structure
+* Rule prioritization ideas.
+* No-savings scenarios.
+* Edge case handling.
+* Early unit test planning.
+* Test organization structure.
 
 #### What I Changed Manually
 
@@ -681,11 +681,11 @@ The recommendation engine was already generating deterministic audit results, so
 
 The output helped with:
 
-* Results page structure
-* Presentation-focused component boundaries
-* Currency formatting organization
-* Audit result serialization
-* Loading and error handling patterns
+* Results page structure.
+* Presentation-focused component boundaries.
+* Currency formatting organization.
+* Audit result serialization.
+* Loading and error handling patterns.
 
 #### What I Changed Manually
 
@@ -769,12 +769,12 @@ The assignment specifically emphasized visual quality and shareability of the au
 
 The output helped with:
 
-* Hero section hierarchy
-* Recommendation card organization
-* Responsive spacing
-* Savings visibility
-* No-savings messaging
-* Screenshot-friendly presentation
+* Hero section hierarchy.
+* Recommendation card organization.
+* Responsive spacing.
+* Savings visibility.
+* No-savings messaging.
+* Screenshot-friendly presentation.
 
 #### What I Changed Manually
 
@@ -853,12 +853,12 @@ The assignment explicitly required AI-generated summaries, but I wanted the reco
 
 The output helped with:
 
-* AI summary architecture
-* Fallback summary handling
-* Prompt safety considerations
-* Conditional CTA planning
-* Trustworthy conversion messaging
-* API failure handling
+* AI summary architecture.
+* Fallback summary handling.
+* Prompt safety considerations.
+* Conditional CTA planning.
+* Trustworthy conversion messaging.
+* API failure handling.
 
 #### What I Changed Manually
 
@@ -941,12 +941,12 @@ At this stage, the core audit logic was already functioning correctly, so the fo
 
 The output helped with:
 
-* Responsive layout improvements
-* Accessibility refinements
-* Loading state UX
-* Open Graph preparation ideas
-* Screenshot-friendly structure
-* Layout consistency
+* Responsive layout improvements.
+* Accessibility refinements.
+* Loading state UX.
+* Open Graph preparation ideas.
+* Screenshot-friendly structure.
+* Layout consistency.
 
 #### What I Changed Manually
 
@@ -1038,12 +1038,12 @@ The frontend audit flow and recommendation engine were already stable, so the ne
 
 The output helped with:
 
-* Database schema planning
-* Audit serialization structure
-* API route organization
-* Public/private report separation
-* Retry-safe persistence patterns
-* Future row-level security considerations
+* Database schema planning.
+* Audit serialization structure.
+* API route organization.
+* Public/private report separation.
+* Retry-safe persistence patterns.
+* Future row-level security considerations.
 
 #### What I Changed Manually
 
@@ -1122,12 +1122,12 @@ The assignment emphasized delivering value before requesting user information, s
 
 The output helped with:
 
-* Lead capture architecture
-* Transactional email flow planning
-* Retry-safe submission handling
-* Confirmation messaging
-* Conversion UX structure
-* API route separation
+* Lead capture architecture.
+* Transactional email flow planning.
+* Retry-safe submission handling.
+* Confirmation messaging.
+* Conversion UX structure.
+* API route separation.
 
 #### What I Changed Manually
 
@@ -1216,13 +1216,407 @@ At this stage, the application was approaching production readiness, so I focuse
 
 The output helped with:
 
-* Public result architecture
-* Payload sanitization planning
-* Open Graph and social preview preparation
-* Rate limiting ideas
-* Deployment readiness improvements
-* Backend reliability considerations
+* Public result architecture.
+* Payload sanitization planning.
+* Open Graph and social preview preparation.
+* Rate limiting ideas.
+* Deployment readiness improvements.
+* Backend reliability considerations.
 
 #### What I Changed Manually
 
 Some recommendations leaned toward infrastructure complexity that was unnecessary for an MVP submission. I intentionally kept abuse protection and deployment hardening lightweight and maintainable.
+
+---
+
+## Day 6
+
+### Prompt 1
+
+Used Gemini 3.1 Pro (Low) to improve Lighthouse performance, accessibility, and production deployment readiness.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am optimizing a production-ready AI Spend Audit SaaS application before final deployment on Vercel.
+
+Current stack:
+- Next.js 15 App Router
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Supabase
+- OpenAI API
+- Resend
+
+Current progress:
+- Audit engine completed
+- Results dashboard completed
+- AI summaries completed
+- Public shareable URLs completed
+- Lead capture completed
+- SSR results pages completed
+- Accessibility improvements completed
+
+Deployment requirements:
+- Lighthouse Performance ≥ 85
+- Accessibility ≥ 90
+- Best Practices ≥ 90
+
+Goal of this segment:
+Improve Lighthouse scores, mobile responsiveness, and production performance without rewriting the architecture.
+
+Please help generate:
+1. Lighthouse optimization checklist for:
+   - Next.js App Router
+   - SSR pages
+   - hydration minimization
+   - loading states
+   - image optimization
+2. Suggestions for:
+   - reducing layout shift
+   - improving perceived performance
+   - route-level loading UX
+   - bundle optimization
+3. Best practices for:
+   - dynamic imports
+   - server/client component boundaries
+   - metadata optimization
+   - Open Graph image handling
+4. Accessibility recommendations for:
+   - semantic structure
+   - keyboard navigation
+   - screen reader support
+   - contrast and focus states
+5. Suggestions for:
+   - production logging
+   - monitoring
+   - graceful API failures
+   - Vercel deployment readiness
+6. Common Lighthouse issues in Next.js SaaS apps and how to avoid them
+
+Avoid:
+- unnecessary rewrites
+- premature micro-optimizations
+- overengineered performance tooling
+
+Focus on practical production optimization for a polished SaaS MVP.
+```
+
+#### Why I Used This Prompt
+
+At this stage, the product was functionally complete, so the focus shifted toward deployment quality, Lighthouse performance, accessibility, and production readiness. I wanted to identify high-impact optimizations without introducing unnecessary architectural complexity late in development.
+
+#### What Was Useful
+
+The output helped with:
+
+* Route-level loading state improvements.
+* Skeleton stabilization for reducing CLS.
+* Accessibility refinements.
+* Server/client component boundary optimization.
+* Vercel Analytics and monitoring setup.
+* Production deployment verification strategies.
+
+#### What I Changed Manually
+
+Some optimization suggestions leaned too heavily toward premature bundle-level micro-optimizations. I prioritized practical improvements with measurable UX impact instead of aggressively restructuring the application.
+
+---
+
+### Prompt 2
+
+Used Gemini 3.1 Pro (Low) to design a benchmark engine for comparative AI spend insights.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am adding a benchmark comparison feature to an AI Spend Audit SaaS application.
+
+Current application capabilities:
+- Deterministic audit engine
+- Savings recommendations
+- Public shareable reports
+- AI-generated executive summaries
+- Lead capture and persistence
+
+The benchmark feature should help users contextualize their AI spend relative to similar startups or engineering teams.
+
+Goal of this segment:
+Design a lightweight benchmark engine that adds credibility and insight without requiring massive datasets.
+
+Requirements:
+- Benchmark AI spend per employee/developer
+- Compare companies by:
+  - team size
+  - primary use case
+  - tooling mix
+- Keep benchmark logic explainable
+- Avoid fake precision
+- Maintain user trust
+
+Please help generate:
+1. Recommended benchmark engine architecture
+2. Suggestions for:
+   - benchmark categories
+   - normalization logic
+   - percentile-style comparisons
+3. Best practices for:
+   - communicating uncertainty
+   - avoiding misleading benchmarks
+   - keeping comparisons believable
+4. Suggestions for:
+   - displaying benchmark insights
+   - integrating benchmark data into results pages
+   - contextual savings messaging
+5. Recommended TypeScript structures for:
+   - benchmark datasets
+   - normalized comparison inputs
+   - benchmark outputs
+6. Suggestions for:
+   - future real-data collection
+   - anonymous aggregation
+   - benchmark evolution over time
+7. Edge cases and misleading scenarios to avoid
+
+Avoid:
+- fake AI-generated market statistics
+- overcomplicated data science pipelines
+- unrealistic benchmarking claims
+
+Focus on trustworthy and explainable benchmark insights for startup teams.
+```
+
+#### Why I Used This Prompt
+
+The benchmark feature aligned closely with the product’s positioning around AI tooling visibility and optimization. I wanted comparative insights that felt credible and explainable rather than artificially precise.
+
+#### What Was Useful
+
+The output helped with:
+
+* Benchmark categorization ideas.
+* Spend normalization strategies.
+* Comparative insight presentation.
+* Uncertainty communication.
+* Lightweight benchmark architecture.
+* Future anonymous aggregation concepts.
+
+#### What I Changed Manually
+
+Some generated suggestions implied unrealistic statistical confidence despite the lack of large-scale production data. I intentionally simplified benchmark messaging to remain transparent and trustworthy.
+
+---
+
+### Prompt 3
+
+Used Gemini 3.1 Pro (Low) to design a lightweight PDF export system for audit reports.
+
+#### Prompt
+
+```text
+Project Context:
+
+I am adding a PDF export feature to an AI Spend Audit SaaS application as a post-MVP enhancement.
+
+Current application capabilities:
+- Dynamic audit engine
+- Savings calculations
+- AI-generated summaries
+- Public shareable report URLs
+- Professional SaaS-style results dashboard
+
+The PDF should feel like a founder-ready audit report that could realistically be shared internally with a finance or engineering team.
+
+Goal of this segment:
+Build a lightweight but professional PDF export system for audit reports.
+
+Requirements:
+- Export audit results as downloadable PDFs
+- Include:
+  - savings summary
+  - current vs optimized spend
+  - recommendation breakdowns
+  - AI-generated executive summary
+- Mobile friendly
+- SSR-safe implementation
+- Production-ready UX
+- Maintainable architecture
+
+Please help generate:
+1. Recommended architecture for PDF generation in Next.js
+2. Suggestions for:
+   - server-side vs client-side PDF generation
+   - PDF libraries
+   - rendering audit reports safely
+3. Recommended PDF structure and layout
+4. Best practices for:
+   - typography
+   - spacing
+   - printable formatting
+   - page breaks
+5. Suggestions for:
+   - branded SaaS report styling
+   - summary hierarchy
+   - table formatting
+6. Recommended API route or utility structure
+7. Suggestions for:
+   - loading states
+   - export retries
+   - error handling
+8. Trade-offs between:
+   - react-pdf
+   - Puppeteer
+   - HTML-to-PDF approaches
+
+Avoid:
+- enterprise-grade reporting systems
+- unnecessary template complexity
+- overdesigned print layouts
+
+Focus on a polished MVP-quality export experience.
+```
+
+#### Why I Used This Prompt
+
+The PDF export feature was selected as a practical post-MVP enhancement because it aligned closely with how founders and engineering managers would realistically share optimization reports internally.
+
+#### What Was Useful
+
+The output helped with:
+
+* PDF generation architecture.
+* Export flow structure.
+* Print-friendly layout hierarchy.
+* Report formatting ideas.
+* Error handling strategies.
+* SSR-safe rendering considerations.
+
+#### What I Changed Manually
+
+Some proposed PDF layouts became too visually complex for practical business usage. I simplified the structure to prioritize readability, export reliability, and maintainability.
+
+---
+
+### Prompt 4
+
+Used Claude Sonnet 4.6 to improve the visual design system and overall SaaS polish of the application.
+
+#### Prompt
+
+```text
+I need a high-end visual redesign pass for my AI Spend Audit SaaS application.
+
+IMPORTANT:
+I do NOT want a generic “AI startup” aesthetic.
+I want the product to feel like:
+- a serious AI infrastructure company
+- enterprise-grade
+- trustworthy
+- modern
+- technically sophisticated
+
+Visual inspiration:
+- Vercel
+- Linear
+- Cursor
+- Anthropic Console
+- Ramp
+- Stripe Dashboard
+
+Current stack:
+- Next.js 15 App Router
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+
+Current state:
+- The application works correctly
+- Audit engine is complete
+- Results dashboard is complete
+- Backend persistence is complete
+- Public share URLs are complete
+
+The problem:
+The UI currently feels too plain and resembles a default shadcn form instead of a premium SaaS product.
+
+Current layout:
+- Large single-column audit form
+- White background
+- Light gray borders
+- Minimal visual hierarchy
+
+Goal:
+Elevate the visual system WITHOUT overdesigning it.
+
+I want:
+- stronger visual hierarchy
+- darker premium surfaces
+- cleaner spacing rhythm
+- tighter typography
+- better information density
+- “operating console” feel instead of “basic form”
+- premium B2B SaaS polish
+
+Please help redesign:
+1. Global visual direction.
+2. Color palette.
+3. Surface/card styling.
+4. Typography hierarchy.
+5. Form layout improvements.
+6. Sidebar/sticky layout ideas.
+7. Results dashboard styling.
+8. Recommendation card styling.
+9. Empty states.
+10. Mobile responsiveness.
+
+Important constraints:
+- Keep accessibility strong.
+- Keep the interface practical.
+- Avoid excessive animations.
+- Avoid giant gradients/blobs.
+- Avoid crypto-style visuals.
+- Avoid marketing-heavy aesthetics.
+- Avoid flashy AI gimmicks.
+
+Specific improvements I am interested in:
+- dark theme strategy
+- split-screen layouts
+- live audit preview sidebar
+- compact enterprise-style spacing
+- better card hierarchy
+- subtle depth and contrast
+- premium table/dashboard aesthetics
+
+Please provide:
+- practical Tailwind/shadcn recommendations
+- layout restructuring ideas
+- visual hierarchy improvements
+- specific class/style suggestions
+- examples of high-signal UI patterns
+
+Focus on making the app feel like a premium AI infrastructure SaaS product rather than a generic startup template.
+```
+
+#### Why I Used This Prompt
+
+At this stage, the application was functionally complete, but the visual presentation still felt too close to a default shadcn-based interface. I wanted the product to feel more aligned with modern AI infrastructure companies and enterprise SaaS platforms.
+
+#### What Was Useful
+
+The output helped with:
+
+* Improving visual hierarchy.
+* Refining card and surface styling.
+* Introducing darker premium surfaces.
+* Improving dashboard density and spacing.
+* Creating a more enterprise-focused design direction.
+* Improving the overall “operating console” feel of the application.
+
+#### What I Changed Manually
+
+Some visual suggestions leaned too heavily toward decorative startup aesthetics with gradients and oversized visual effects. I intentionally simplified several recommendations to keep the interface practical, trustworthy, and focused on clarity rather than visual novelty.
