@@ -16,14 +16,15 @@ The project is built as a production ready MVP with a focus on practical audit l
 
 ## Demo & Screenshots
 
-**[Watch the 30-second walkthrough on Loom](https://loom.com/share/mock-link-for-demo)**
+**[Watch the walkthrough on YouTube](https://youtu.be/JC7F7-73svI)**
 
 <details>
 <summary>View Screenshots</summary>
 
-![Landing Page Dashboard](/public/mock-landing.png)
-![Audit Form Entry](/public/mock-form.png)
-![Savings Result Dashboard](/public/mock-results.png)
+![Landing Page Dashboard](/public/landing.png)
+![Audit Form Entry](/public/form.png)
+![Savings Result Dashboard](/public/results1.png)
+![Savings Result Dashboard](/public/results2.png)
 </details>
 
 ## Technology Stack and APIs
