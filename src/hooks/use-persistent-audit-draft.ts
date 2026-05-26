@@ -31,13 +31,20 @@ export function usePersistentAuditDraft(): PersistentAuditDraftState {
   const [storageError, setStorageError] = useState<string>();
 
   useEffect(() => {
-    const persisted = parsePersistedAuditData(
+    const persistedDraft = parsePersistedAuditData(
       readAuditStorage(AUDIT_DRAFT_STORAGE_KEY),
     );
 
-    if (persisted) {
-      setDraftState(persisted.data);
-      setUpdatedAt(persisted.updatedAt);
+    const persistedSubmission = parsePersistedAuditData(
+      readAuditStorage(AUDIT_SUBMISSION_STORAGE_KEY),
+    );
+
+    if (persistedDraft) {
+      setDraftState(persistedDraft.data);
+      setUpdatedAt(persistedDraft.updatedAt);
+    } else if (persistedSubmission) {
+      setDraftState(persistedSubmission.data);
+      setUpdatedAt(persistedSubmission.updatedAt);
     }
 
     setIsLoaded(true);
