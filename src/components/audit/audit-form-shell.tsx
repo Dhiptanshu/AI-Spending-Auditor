@@ -74,7 +74,9 @@ export function AuditFormShell() {
   useEffect(() => {
     const subscription = form.watch((value) => {
       // Form fields exist, but TS thinks value could be Partial. Safe cast to AuditFormValues
-      setDraft(value as AuditFormValues);
+      if (hasInitialized.current) {
+        setDraft(value as AuditFormValues);
+      }
     });
     return () => subscription.unsubscribe();
   }, [form, setDraft]);
