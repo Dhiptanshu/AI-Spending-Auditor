@@ -18,7 +18,6 @@ The project is built as a production ready MVP with a focus on practical audit l
 
 **[Watch the 30-second walkthrough on Loom](https://loom.com/share/mock-link-for-demo)**
 
-*(Mocked screenshot placements for MVP)*
 <details>
 <summary>View Screenshots</summary>
 
