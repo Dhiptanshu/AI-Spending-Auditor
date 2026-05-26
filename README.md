@@ -1,5 +1,7 @@
 # AI Spend Audit
 
+**Live Demo:** [https://ai-spending-auditor.vercel.app/](https://ai-spending-auditor.vercel.app/)
+
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
@@ -11,6 +13,19 @@
 AI Spend Audit is a lightweight SaaS style web application that helps startups and engineering teams evaluate whether they are overspending on AI tooling such as Cursor, ChatGPT, Claude, Copilot, Gemini, and API providers. Users can enter their current plans, spend, and team usage patterns to receive optimization recommendations and estimated savings opportunities.
 
 The project is built as a production ready MVP with a focus on practical audit logic, clean UX, accessibility, and maintainable architecture.
+
+## Demo & Screenshots
+
+**[Watch the 30-second walkthrough on Loom](https://loom.com/share/mock-link-for-demo)**
+
+*(Mocked screenshot placements for MVP)*
+<details>
+<summary>View Screenshots</summary>
+
+![Landing Page Dashboard](/public/mock-landing.png)
+![Audit Form Entry](/public/mock-form.png)
+![Savings Result Dashboard](/public/mock-results.png)
+</details>
 
 ## Technology Stack and APIs
 
@@ -84,7 +99,7 @@ vercel
 
 Or connect the GitHub repository directly through the Vercel dashboard.
 
-## Key Decisions
+## Decisions (Trade-offs)
 
 ### 1. Chose Next.js App Router instead of a traditional SPA
 
